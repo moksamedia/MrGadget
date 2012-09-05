@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 
-version='0.1'
+version='0.2'
 
 configurations {
 	releaseJars {
@@ -16,7 +16,7 @@ dependencies {
 	compile 'com.jcraft:jsch:0.1.48'
 	compile 'org.jasypt:jasypt-acegisecurity:1.9.0'
 	releaseJars 'com.jcraft:jsch:0.1.48', 'org.jasypt:jasypt-acegisecurity:1.9.0'
-	groovy localGroovy()
+	groovy 'org.codehaus.groovy:groovy:1.8.6'
 }
 
 jar {
