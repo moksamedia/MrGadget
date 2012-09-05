@@ -1,5 +1,7 @@
 package com.cantgetnosleep.mrgadget
 
+import groovy.util.logging.Slf4j
+
 import java.awt.BorderLayout
 import java.awt.Font
 import java.text.DecimalFormat
@@ -16,9 +18,14 @@ import org.slf4j.LoggerFactory
 
 import com.jcraft.jsch.Channel
 import com.jcraft.jsch.ChannelExec
+import com.jcraft.jsch.ChannelSftp
 import com.jcraft.jsch.JSch
+import com.jcraft.jsch.JSchException
 import com.jcraft.jsch.Session
+import com.jcraft.jsch.SftpException
+import com.jcraft.jsch.SftpProgressMonitor
 import com.jcraft.jsch.UserInfo
+
 
 /**
  * MrGadget offers three services:
@@ -53,7 +60,9 @@ class MrGadget {
 	
 	JSch jsch = new JSch()
 	Prefs prefs = new Prefs()
-	UserInfo ui = new MyUserInfo();
+	UserInfo ui = new MyUserInfo()
+	
+	DecimalFormat decFormat
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// OPTIONS
@@ -101,6 +110,11 @@ class MrGadget {
 		this.showProgressDialog = params.get('showProgressDialog', this.showProgressDialog)
 		this.preserveTimestamp = params.get('preserveTimestamp', this.preserveTimestamp)
 		this.logProgressGranularity = params.get('logProgressGranularity', this.logProgressGranularity)
+		
+		// decimal format
+		decFormat = new DecimalFormat("#,##0.00")
+		
+		
 	}
 
 	
@@ -209,6 +223,111 @@ class MrGadget {
 	}
 
 	
+	public boolean copyToRemoteSFTP(def params = [:]) {
+		
+		checkHostAndUser()
+		
+		// reality check: we need a local file and a remote file
+		if (!params.containsKey('localFile') || !params.containsKey('remoteFile')) {
+			log.error("Error: remoteFile and localFile must be specified. localFile=$params.localFile, remoteFile=$params.remoteFile")
+			throw new RuntimeException("Error: remoteFile and localFile must be specified. localFile=$params.localFile, remoteFile=$params.remoteFile")
+			return false
+		}
+		
+		// FILES
+		
+		String localFilePath = params.localFile
+		String remoteFilePath = params.remoteFile
+		
+		// should we show the Swing progress dialog
+		boolean showProgressDialog = params.get('showProgressDialog', this.showProgressDialog)
+		// how often should the copy progress be logged (in integer percentage)
+		int logProgressGranularity = params.get('logProgressGranularity', this.logProgressGranularity)
+		
+		log.info "Copying local file '$localFilePath' to ${user}@${host}:'$remoteFilePath'"
+		log.info "Control-C will cancel."
+		
+		
+		// PROGRESS MONITOR STUFF
+
+		SFTPProgressMonitor progMonitor = new SFTPProgressMonitor()
+		ProgressDialog progressDialog
+		
+		int lastReportedPercent = -1
+		double elapsedTimeMin
+		double minRemaining
+		
+		File localFile = new File(localFilePath)
+		
+		// make sure file exists
+		if (!localFile.exists()) {
+			log.error("Error: Unable to open local file '$localFilePath'")
+			throw new RuntimeException("Unable to open local file '$localFilePath'")
+			return false
+		}
+		
+		long fSize = localFile.length()
+		
+		progMonitor.countClosure = { long bytesSent, long bytesToSend, long elapsedTimeMillis ->
+						
+			int percent = Math.round((bytesSent / bytesToSend) * 100)
+			
+			if (percent % logProgressGranularity == 0 && percent != lastReportedPercent) {
+				
+				elapsedTimeMin = elapsedTimeMillis/(60*1000F)
+				
+				if (percent == 0) minRemaining = 0
+				else minRemaining = elapsedTimeMin / (percent / 100F) - elapsedTimeMin
+				
+				log.info "percent = $percent, millis = $elapsedTimeMillis, elapsedTimeMin = $elapsedTimeMin, minRemaining = $minRemaining"
+				
+				log.info "Sent ${percent}% - ${MrGadget.humanReadableByteCount(bytesSent)} of ${MrGadget.humanReadableByteCount(bytesToSend)} - ${decFormat.format(minRemaining)} min. remaining"
+				lastReportedPercent = percent
+			}
+			
+			if (showProgressDialog) progressDialog.setValue(bytesSent)
+			
+		}
+		
+		try {
+			
+			createSession()
+			
+			Channel channel = session.openChannel("sftp")
+			channel.connect()
+			ChannelSftp sftpChannel = (ChannelSftp) channel
+	
+			if (showProgressDialog) {
+				log.info "Showing progress dialog. Closing dialog will NOT halt transfer, but closing Gradle process (if using gradle), will stop transfer."
+				progressDialog = new ProgressDialog(localFilePath.split('/').last(), host, remoteFilePath, fSize)
+			}
+
+			log.info "Sending ${MrGadget.humanReadableByteCount(fSize)} bytes."
+			
+			sftpChannel.put(localFilePath, remoteFilePath, progMonitor)
+			
+			if (showProgressDialog) progressDialog.setVisible(false)
+			
+			log.info "Finished sending file!"
+			
+			sftpChannel.exit()
+			
+			if (!leaveSessionOpen) session.disconnect()
+			true
+			
+		} 
+		catch (JSchException e) {
+			log.error("Unable to send file: $localFilePath.", e)
+			false
+		} 
+		catch (SftpException e) {
+			log.error("Unable to send file: $localFilePath.", e)
+			false
+		}
+		
+	}
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// SCP
 	
@@ -251,9 +370,7 @@ class MrGadget {
 		log.info "Control-C will cancel."
 		
 		FileInputStream fis
-		
-		DecimalFormat decFormat = new DecimalFormat("#,###.#")
-		
+			
 		// Checks the results / exit code of last executed command by reading the input stream
 		Closure checkResult = { InputStream input ->
 			int b=input.read();
@@ -321,6 +438,7 @@ class MrGadget {
 				throw new RuntimeException("Unable to open local file '$localFilePath'")
 				return false
 			}
+			
 
 			if(preserveTimestamp) {
 				
@@ -385,17 +503,28 @@ class MrGadget {
 			log.info "Sending ${MrGadget.humanReadableByteCount(filesize)} bytes."
 			
 			while(true) {
+				
+				// read from input buffer (localFile)
 				int len=fis.read(buf, 0, buf.length);
+				
+				// if we're finished, stop
 				if(len<=0) break;
+				
+				// write to output buffer
 				out.write(buf, 0, len); //out.flush();
+
+				// progress monitoring code				
 				bytesWritten += len
 				count += 1
 				percent = Math.round((bytesWritten / filesize) * 100)
 				if (percent % logProgressGranularity == 0 && percent != lastReportedPercent) {
 					elapsedTimeMillis = (new Date()).getTime() - start.getTime()
 					elapsedTimeMin = elapsedTimeMillis/(60*1000F)
-					minRemaining = elapsedTimeMin / (percent / 100) - elapsedTimeMin
+					if (percent == 0) minRemaining = 0
+					else minRemaining = elapsedTimeMin / (percent / 100) - elapsedTimeMin
+					
 					log.info "Sent ${percent}% - ${MrGadget.humanReadableByteCount(bytesWritten)} of ${MrGadget.humanReadableByteCount(filesize)} - ${decFormat.format(minRemaining)} min. remaining"
+					
 					lastReportedPercent = percent
 				}
 				if (showProgressDialog) progressDialog.setValue(bytesWritten)
@@ -650,6 +779,40 @@ class MrGadget {
 	}
 }
 
+@Slf4j
+class SFTPProgressMonitor implements SftpProgressMonitor {
+
+	String sourceFile
+	String destinationFile
+	long bytesToSend
+	long bytesSent = 0
+	Closure countClosure
+	long elapsedTimeMillis
+	
+	Date start
+	
+	@Override
+	public void init(int op, String src, String dest, long max) {
+		sourceFile = src
+		destinationFile = dest
+		bytesToSend = max
+		start = new Date()
+	}
+
+	@Override
+	public boolean count(long count) {
+		bytesSent += count
+		elapsedTimeMillis = (new Date()).getTime() - start.getTime()
+		countClosure?.call(bytesSent, bytesToSend, elapsedTimeMillis)
+		true
+	}
+
+	@Override
+	public void end() {
+		
+	}
+	
+}
 
 // Progress bar dialog optionally used when sending files remotely
 class ProgressDialog {
