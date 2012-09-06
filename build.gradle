@@ -23,9 +23,15 @@ jar {
 	from configurations.releaseJars.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
+println jar.archiveName
 
 repositories {
 	mavenCentral()
+}
+
+task('copyJarToBasedir', type: Copy) {
+	from("$buildDir/libs/${jar.archiveName}")
+	into("$projectDir/${jar.archiveName}")
 }
 
 /*
