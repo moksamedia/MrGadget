@@ -35,13 +35,28 @@ build << {
 	}
 }
 
-/*
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-group = 'org.moksamedia'
+group = 'com.moksamedia'
 
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+// custom tasks for creating javadoc jar
+task javadocJar(type: Jar, dependsOn:javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+uploadArchives.dependsOn javadocJar, sourcesJar, jar
+
+// add the jars as artifacts
 artifacts {
+	archives sourcesJar
+	archives javadocJar
 	archives jar
 }
 
@@ -49,25 +64,26 @@ signing {
 	sign configurations.archives
 }
 
+
 uploadArchives {
 	repositories {
 		mavenDeployer {
 			beforeDeployment { MavenDeployment deployment -> signPom(deployment) }
  
 			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-			  authentication(userName: 'cantgetnosleep', password: 'grenwulf')
+			  authentication(userName: sonatypeUsername, password: sonatypePassword)
 			}
  
 			pom.project {
 			   name 'MrGadget'
 			   packaging 'jar'
 			   description 'MrGadget is a utility (build for Gradle, but generally usable anywhere) that can upload files to a remote server and execute commands on a remote server'
-			   url 'http://github.com/moksamedia/blograt'
+			   url 'http://github.com/moksamedia/MrGadget'
  
 			   scm {
-				   url 'scm:git@github.com:moksamedia/blograt.git'
-				   connection 'scm:git@github.com:moksamedia/blograt.git'
-				   developerConnection 'scm:git@github.com:moksamedia/blograt.git'
+				   url 'scm:git@github.com:moksamedia/MrGadget.git'
+				   connection 'scm:git@github.com:moksamedia/MrGadget.git'
+				   developerConnection 'scm:git@github.com:moksamedia/MrGadget.git'
 			   }
  
 			   licenses {
@@ -103,4 +119,3 @@ uploadArchives {
 		}
 	}
 }
-*/
