@@ -23,35 +23,49 @@ class Prefs {
 		
 		prefs = Preferences.userNodeForPackage(this.class)
 		stringEncryptor = new StandardPBEStringEncryptor()
+				
+		if (reset && !isFirstLoad()) resetPrefs()
 		
-		if (reset) resetPrefs()
-		
+		if (isFirstLoad()) {
+			log.info "IS FIRST LOAD"
+			onFirstLoad()
+		}
+		else {
+			log.info "NOT FIRST LOAD"
+		}
+
 		// if we're passing in a password, use that
 		if (val != null) {
 			stringEncryptor.setPassword(val)
 		}
 		// otherwise, use a generated one
 		else {
+			
+			def ks = 'abcd'.inject([]) { acm, vl ->
+				acm += [vl+'1', vl+'2']; acm
+			}
+			
+			log.info "ks=" + ks.toString()
+			
+			def seedStringLength = 40
 			// generate the pass on first load (or after reset)
 			if (isFirstLoad()) {
-				def v = genVals(40) // should be length of char strings
-				prefs.put('a1', v[0][0])
-				prefs.put('a2', v[0][1])
-				prefs.put('b1', v[1][0])
-				prefs.put('b2', v[1][1])
-				prefs.put('c1', v[2][0])
-				prefs.put('c2', v[2][1])
-				prefs.put('d1', v[3][0])
-				prefs.put('d2', v[3][1])
+				log.info "Generating password"
+				def v = gvls(seedStringLength) // should be length of char strings
+				ks.eachWithIndex { it, i ->
+					prefs.put((it), v[i])
+				}
 				prefs.flush()
 			}
-			// get the generated password
-			stringEncryptor.setPassword(
-				prefs.get('a1','0') + prefs.get('a2','0') +
-				prefs.get('b1','0') + prefs.get('b2','0') +
-				prefs.get('c1','0') + prefs.get('c2','0') +
-				prefs.get('d1','0') + prefs.get('d2','0'))
 			
+			log.info "KEYS=" + prefs.keys().toString()
+			
+			// get the generated password
+			String pass = (ks.inject("") { a, v ->
+				a += prefs.get((v.toString()),'-1'); a
+			})
+			log.info pass
+			stringEncryptor.setPassword(pass)			
 		}
 		stringEncryptor.initialize()
 	}
@@ -116,7 +130,7 @@ class Prefs {
 	}
 	
 	// RANDOM PASSWORD GENERATION STUFF
-	
+	def seedStringLength = 40
 	String a = "a234h1onnj20938hwoiejf092u3hsidbfn23240u2" // length = 41 chars
 	String b = "2093bkejr20023984ksjnviuwh897y239hwu93u4o"
 	String c = "20w8ehs20398uonlaw84u52j3hknqlnbvjhouhsjd"
@@ -124,19 +138,19 @@ class Prefs {
 		
 	Random rand = new Random()
 	
-	Closure randRange = { int aStart, int aEnd ->
+	Closure rr = { int aStart, int aEnd ->
 		long range = (long)aEnd - (long)aStart + 1
 		long fraction = (long)(range * rand.nextDouble())
 		(int)(fraction + aStart)
 	}
 	
-	Closure getNumPair = { int min, int max ->
+	Closure gnp = { int min, int max ->
 		int half = Math.floor(max - min) / 2
-		[randRange(min,half), randRange(half,max)]
+		[rr(min,half), rr(half,max)]
 	}
 	
-	Closure genVals = { int len ->
-		[getNumPair(0,len), getNumPair(0,len), getNumPair(0,len), getNumPair(0,len)]
+	Closure gvls = { int len ->
+		gnp(0,len) + gnp(0,len) + gnp(0,len) + gnp(0,len)
 	}
 
 }
