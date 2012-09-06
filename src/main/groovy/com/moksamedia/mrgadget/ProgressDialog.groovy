@@ -1,4 +1,4 @@
-package org.moksamedia.mrgadget
+package com.moksamedia.mrgadget
 
 import java.awt.BorderLayout
 import java.awt.Font

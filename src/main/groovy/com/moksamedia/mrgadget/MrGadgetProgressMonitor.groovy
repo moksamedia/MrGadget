@@ -1,4 +1,4 @@
-package org.moksamedia.mrgadget
+package com.moksamedia.mrgadget
 
 import groovy.util.logging.Slf4j
 
