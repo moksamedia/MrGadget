@@ -359,17 +359,18 @@ class MrGadget {
 			
 		// Checks the results / exit code of last executed command by reading the input stream
 		Closure checkResult = { InputStream input ->
-			int b=input.read();
+			
+			int b = input.read()
 			// b may be 0 for success,
 			//          1 for error,
 			//          2 for fatal error,
 			//          -1
-			if(b==0) return b;
-			if(b==-1) return b;
+			if (b==0) return b 
+			if (b==-1) return b 
 
 			if(b==1 || b==2)
 			{
-				StringBuffer sb=new StringBuffer();
+				StringBuffer sb = new StringBuffer()	
 				int c
 				
 				while (true) {
@@ -387,7 +388,7 @@ class MrGadget {
 					throw new RuntimeException("Fatal Error: " + sb.toString())
 				}
 			}
-			return b;
+			return b
 		}
 		
 		try {
