@@ -51,7 +51,7 @@ task javadocJar(type: Jar, dependsOn:javadoc) {
 	from javadoc.destinationDir
 }
 
-uploadArchives.dependsOn javadocJar, sourcesJar, jar
+//uploadArchives.dependsOn javadocJar, sourcesJar, jar
 
 // add the jars as artifacts
 artifacts {
@@ -100,21 +100,6 @@ uploadArchives {
 					   name 'Andrew Hughes'
 				   }
 			   }
-		   }
- 
-		   //mess with the generated pom to set the 'packaging' tag
-		   pom.withXml { XmlProvider xmlProvider ->
-			   def xml = xmlProvider.asString()
-			   def pomXml = new XmlParser().parse(new ByteArrayInputStream(xml.toString().bytes))
- 
-			   pomXml.version[0] + { packaging('jar') }
- 
-			   def newXml = new StringWriter()
-			   def printer = new XmlNodePrinter(new PrintWriter(newXml))
-			   printer.preserveWhitespace = true
-			   printer.print(pomXml)
-			   xml.setLength(0)
-			   xml.append(newXml.toString())
 		   }
 		}
 	}
