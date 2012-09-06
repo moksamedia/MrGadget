@@ -19,21 +19,18 @@ class Prefs {
 
 	StandardPBEStringEncryptor stringEncryptor
 	
-	public Prefs(String val = null, boolean reset = false) {
+	public Prefs(def params = [:]) {
+		
+		String val = params.get('val', null)
+		boolean clearAllPasswords = params.get('clearAllPasswords', false)
 		
 		prefs = Preferences.userNodeForPackage(this.class)
 		stringEncryptor = new StandardPBEStringEncryptor()
 				
-		if (reset && !isFirstLoad()) resetPrefs()
+		if (clearAllPasswords) resetPrefs()
+	
+		boolean isFirstLoad = isFirstLoad() // this must go AFTER resetPrefs()
 		
-		if (isFirstLoad()) {
-			log.info "IS FIRST LOAD"
-			onFirstLoad()
-		}
-		else {
-			log.info "NOT FIRST LOAD"
-		}
-
 		// if we're passing in a password, use that
 		if (val != null) {
 			stringEncryptor.setPassword(val)
@@ -41,31 +38,25 @@ class Prefs {
 		// otherwise, use a generated one
 		else {
 			
-			def ks = 'abcd'.inject([]) { acm, vl ->
-				acm += [vl+'1', vl+'2']; acm
-			}
-			
-			log.info "ks=" + ks.toString()
-			
-			def seedStringLength = 40
 			// generate the pass on first load (or after reset)
-			if (isFirstLoad()) {
-				log.info "Generating password"
+			if (isFirstLoad) {
 				def v = gvls(seedStringLength) // should be length of char strings
+				def ks = seedStrings.inject([]) { a, vl ->
+					a += [vl+'1', vl+'2']; a
+				}
 				ks.eachWithIndex { it, i ->
-					prefs.put((it), v[i])
+					prefs.putInt((it), v[i])
 				}
 				prefs.flush()
 			}
 			
-			log.info "KEYS=" + prefs.keys().toString()
-			
-			// get the generated password
-			String pass = (ks.inject("") { a, v ->
-				a += prefs.get((v.toString()),'-1'); a
-			})
-			log.info pass
-			stringEncryptor.setPassword(pass)			
+			// load and reconstruct password			
+			int i = 0
+			stringEncryptor.setPassword( seedStrings.inject("") { a2, v2 -> 
+				a2 += (this."$v2")[(prefs.getInt("${v2}1", -1))..(prefs.getInt("${v2}2", -1))]
+				i += 2
+				a2 })	
+	
 		}
 		stringEncryptor.initialize()
 	}
@@ -115,22 +106,27 @@ class Prefs {
 	}
 
 	protected boolean isFirstLoad() {
-		prefs.getBoolean("PROGRAM_RUN", false)
-	}
-
-	protected void onFirstLoad() {
-		prefs.putBoolean("PROGRAM_RUN", true)
+		
+		if (!prefs.getBoolean("PROGRAM_RUN", false)) { // negate here, think of what we're actually storing as "has been run"
+			log.info "IS FIRST LOAD"
+			prefs.putBoolean("PROGRAM_RUN", true)
+			true
+		}
+		else {
+			log.info "IS NOT FIRST LOAD"
+			false
+		}
 	}
 
 	protected void resetPrefs() {
 		log.info "Resetting prefs and removing all passwords"
 		prefs.removeNode()
-		prefs.flush()
 		prefs = Preferences.userNodeForPackage(this.class)
 	}
 	
 	// RANDOM PASSWORD GENERATION STUFF
 	def seedStringLength = 40
+	def seedStrings = 'abcd'
 	String a = "a234h1onnj20938hwoiejf092u3hsidbfn23240u2" // length = 41 chars
 	String b = "2093bkejr20023984ksjnviuwh897y239hwu93u4o"
 	String c = "20w8ehs20398uonlaw84u52j3hknqlnbvjhouhsjd"
