@@ -1,0 +1,121 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+version='0.2'
+
+configurations {
+	releaseJars {
+		repositories {
+			mavenCentral()
+		}
+	}
+}
+
+dependencies {
+	compile 'org.slf4j:slf4j-simple:1.6.3'
+	compile 'com.jcraft:jsch:0.1.48'
+	compile 'org.jasypt:jasypt-acegisecurity:1.9.0'
+	releaseJars 'com.jcraft:jsch:0.1.48', 'org.jasypt:jasypt-acegisecurity:1.9.0'
+	groovy 'org.codehaus.groovy:groovy:1.8.6'
+}
+
+jar {
+	from configurations.releaseJars.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+repositories {
+	mavenCentral()
+}
+
+build << {
+	copy {
+		println "Copying ${jar.archiveName} to base directory"
+		from("$buildDir/libs/${jar.archiveName}")
+		into("$projectDir")
+	}
+}
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group = 'com.moksamedia'
+
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+// custom tasks for creating javadoc jar
+task javadocJar(type: Jar, dependsOn:javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+uploadArchives.dependsOn javadocJar, sourcesJar, jar
+
+// add the jars as artifacts
+artifacts {
+	archives sourcesJar
+	archives javadocJar
+	archives jar
+}
+
+signing {
+	sign configurations.archives
+}
+
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			beforeDeployment { MavenDeployment deployment -> signPom(deployment) }
+ 
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+			  authentication(userName: sonatypeUsername, password: sonatypePassword)
+			}
+ 
+			pom.project {
+			   name 'MrGadget'
+			   packaging 'jar'
+			   description 'MrGadget is a utility (build for Gradle, but generally usable anywhere) that can upload files to a remote server and execute commands on a remote server'
+			   url 'http://github.com/moksamedia/MrGadget'
+ 
+			   scm {
+				   url 'scm:git@github.com:moksamedia/MrGadget.git'
+				   connection 'scm:git@github.com:moksamedia/MrGadget.git'
+				   developerConnection 'scm:git@github.com:moksamedia/MrGadget.git'
+			   }
+ 
+			   licenses {
+				   license {
+					   name 'The Apache Software License, Version 2.0'
+					   url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					   distribution 'repo'
+				   }
+			   }
+ 
+			   developers {
+				   developer {
+					   id 'cantgetnosleep'
+					   name 'Andrew Hughes'
+				   }
+			   }
+		   }
+ 
+		   //mess with the generated pom to set the 'packaging' tag
+		   pom.withXml { XmlProvider xmlProvider ->
+			   def xml = xmlProvider.asString()
+			   def pomXml = new XmlParser().parse(new ByteArrayInputStream(xml.toString().bytes))
+ 
+			   pomXml.version[0] + { packaging('jar') }
+ 
+			   def newXml = new StringWriter()
+			   def printer = new XmlNodePrinter(new PrintWriter(newXml))
+			   printer.preserveWhitespace = true
+			   printer.print(pomXml)
+			   xml.setLength(0)
+			   xml.append(newXml.toString())
+		   }
+		}
+	}
+}
