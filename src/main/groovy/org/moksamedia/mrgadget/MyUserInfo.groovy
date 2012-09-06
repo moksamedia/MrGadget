@@ -1,4 +1,4 @@
-package com.cantgetnosleep.mrgadget
+package org.moksamedia.mrgadget
 
 import groovy.util.logging.Slf4j
 
