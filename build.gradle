@@ -31,7 +31,7 @@ build << {
 	copy {
 		println "Copying ${jar.archiveName} to base directory"
 		from("$buildDir/libs/${jar.archiveName}")
-		into("$projectDir/${jar.archiveName}")
+		into("$projectDir")
 	}
 }
 
