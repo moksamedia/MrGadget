@@ -31,52 +31,48 @@ Add the import statement and the dependency to the gradle buildscript block as s
 
 Use him in some tasks!
 
-	task copyToServerOnly {
-
-		doLast {
+	task copyToServerOnly << {
 	
-			MrGadget mrg = new MrGadget(
-				user:'someuser', 
-				host:'www.someuser.com', 
-				strictHostKeyChecking:false)
-			
-			logger.info "SENDING FILE"
-			mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
+		MrGadget mrg = new MrGadget(
+			user:'someuser', 					// user and host must always be set
+			host:'www.someuser.com', 
+			strictHostKeyChecking:false)		// can turn off strict host key checking to avoid host key errors
 		
-		}
+		logger.info "SENDING FILE"
+		mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
+
 	}
 
-	task deployToServerAndFix {
-	
-		doLast {
+	task deployToServerAndFix << {
 		
-			MrGadget mrg = new MrGadget(
-				user:'someuser', 
-				host:'www.someuser.com', 
-				strictHostKeyChecking:false, 
-				leaveSessionOpen:true)
-				
-			logger.info "SENDING FILE"
-			mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
+		MrGadget mrg = new MrGadget(
+			user:'someuser', 
+			host:'www.someuser.com', 
+			strictHostKeyChecking:false, 
+			leaveSessionOpen:true)				// leave session open to avoid having to reconnect when executing
+												// multiple successive commands
 			
-			logger.info "SETTING OWNER OF WAR"
-			mrg.execRemoteSudo("chown tomcat6:tomcat6 /websites/someapp.war")
-			
-			logger.info "SETTING PERMISSION OF WAR"
-			mrg.execRemoteSudo("chmod 775 /websites/someapp.war")
-			
-			logger.info "RESTARTING TOMCAT"
-			mrg.execRemoteSudo("service tomcat6 restart")
-						
-			logger.info "FINISHED"
-			mrg.closeSession()
-		}
+		logger.info "SENDING FILE"
+		mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
+		
+		logger.info "SETTING OWNER OF WAR"
+		mrg.execRemoteSudo("chown tomcat6:tomcat6 /websites/someapp.war")
+		
+		logger.info "SETTING PERMISSION OF WAR"
+		mrg.execRemoteSudo("chmod 775 /websites/someapp.war")
+		
+		logger.info "RESTARTING TOMCAT"
+		mrg.execRemoteSudo("service tomcat6 restart")
+					
+		logger.info "FINISHED"
+		mrg.closeSession()						// don't forget to close the session
+
 	}
 
-	task clearPasswords << {
+	task clearPasswords << {					
 		MrGadget mrg = new MrGadget(
 			user:'someuser',
 			host:'www.someuser.com',
-			clearAllPasswords:true)
+			clearAllPasswords:true)				// passwords can be wiped from system prefs
 	}
 
