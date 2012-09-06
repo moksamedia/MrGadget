@@ -114,10 +114,10 @@ class MrGadget {
 		boolean clearAllPasswords = params.get('clearAllPasswords', false)
 		
 		if (params.containsKey("prefsEncryptionPassword")) {
-			prefs = new Prefs(params.prefsEncryptionPassword,clearAllPasswords) // use passed-in password
+			prefs = new Prefs(val:params.prefsEncryptionPassword, clearAllPasswords:clearAllPasswords) // use passed-in password
 		}
 		else {
-			prefs = new Prefs(null,clearAllPasswords) // null: uses generated pass or loads it
+			prefs = new Prefs(val:null,clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
 		}
 		
 		// decimal format
