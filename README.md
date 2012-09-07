@@ -78,7 +78,7 @@ You could also import directly from the GitHub repo:
 			mavenCentral()
 			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
 				name = 'mrgadget-plugin'
-				basePath = 'https://raw.github.com/moksamedia/mrgadget-gradle-plugin/master/repo'
+				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
 				addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
 			}
 		}
