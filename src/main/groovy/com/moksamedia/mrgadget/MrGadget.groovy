@@ -95,6 +95,24 @@ class MrGadget {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTOR
 	
+	/**
+	 * Default Constructor
+	 * 
+	 * Params are passed in as a Map.
+	 * - host : host name or ip address of remote server (REQUIRED to connect, but can be set post-constructor)
+	 * - user : username used to connect to remote server (REQUIRED to connect, but can be set post-constructor)
+	 * - leaveSessionOpen : if multiple commands are to be executed, this can be used to avoid having to re-connect
+	 * 						for each action; default FALSE
+	 * - sudoPassDifferent : set to true if the sudo password is different than the user login password; default FALSE
+	 * - promptToSavePass : set to false if you don't want MrG to prompt you to save your password; default TRUE
+	 * - strictHostKeyChecking : set to false to disable strict host key checking; defaults to TRUE
+	 * - showProgressDialog : set to false to suppress the Swing progress dialog box while transferring files; default TRUE
+	 * - preserveTimestamp : set to true to preserve timestamp of file copied to remote server; default FALSE
+	 * - logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending
+	 * 							  progress is reported (log.info)
+	 * - clearAllPasswords : if true, all stored passwords will as well as the encryption key will be erased
+	 * - prefsEncryptionPassword : if you would like to use a passed-in encryption password instead of an auto-generated one
+	 */
 	public MrGadget(def params = [:]) {
 		
 		// set host and user, if supplied
@@ -117,7 +135,7 @@ class MrGadget {
 			prefs = new Prefs(val:params.prefsEncryptionPassword, clearAllPasswords:clearAllPasswords) // use passed-in password
 		}
 		else {
-			prefs = new Prefs(val:null,clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
+			prefs = new Prefs(val:null, clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
 		}
 		
 		// decimal format
@@ -143,10 +161,14 @@ class MrGadget {
 		
 		session = jsch.getSession(user, host, 22);
 
+		log.info "********** MrGadget Session Created **********"
+		
 		if (strictHostKeyChecking) {
+			log.debug "Strict host key checking is ON"
 			session.setConfig("StrictHostKeyChecking", "yes");
 		}
 		else {
+			log.debug "Strict host key checking is OFF"
 			session.setConfig("StrictHostKeyChecking", "no");
 		}
 
@@ -157,7 +179,7 @@ class MrGadget {
 		
 		// if we have a saved password
 		if (pass != null) {
-			log.info "Using saved password for ${user}@${host}"
+			log.debug "Using saved password for ${user}@${host}"
 			session.setPassword(pass)
 			ui.passwd = pass // put the password in the ui so that if we're running a sudo command we can get it out later
 			session.connect()
@@ -168,16 +190,21 @@ class MrGadget {
 			// prompt to save, if should
 			if (promptToSavePass && ui.promptYesNo("Would you like to save the password (encrypted) for ${user}@${host} in the system prefs?")) {
 				prefs.storePassword(ui.getPassword(), user, host)
-				log.info "Password saved (encrypted) for ${user}@${host}"
+				log.debug "Password saved (encrypted) for ${user}@${host}"
 			}
 
 		}
 
 	}
-	
-	// close the session (only needed if leaveSessionOpen = true)
+
+	/**
+	 * Close the JSch session (only needed if leaveSessionOpen = true)
+	 */
 	public void closeSession() {
-		if (session?.isConnected()) session.disconnect()
+		if (session?.isConnected()) {
+			session.disconnect()
+			log.info "********** MrGadget Session Closed **********"
+		}
 	}
 	
 
@@ -216,22 +243,37 @@ class MrGadget {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CLEAR PASSWORDS
 	
-	// clear all passwords saved in prefs
+	/**
+	 * Clear all passwords saved in prefs, as well as the password key
+	 */
 	public void clearAllPasswords() {
 		prefs.resetPrefs()
 	}
 	
-	// clear password for user and host saved in prefs
+	/**
+	 * Clear password for a user and host saved in prefs; key is not cleared
+	 */
 	public void clearPasswordsForUserAtHost(String user, String host) {
 		prefs.removeAllPrefsForUserAtHost(user, host)
 	}
 
-	// clear all passwords for user at all hosts
+	/**
+	 * Clear password for a user at all hosts saved in prefs; key is not cleared
+	 */
 	public void clearPasswordsForUser(String user) {
 		prefs.removeAllPrefsForUser(user)
 	}
 
-	
+	/**
+	 * Copies a file to a remote server using SFTP
+	 * Params are stored in a Map
+	 * - localFile : full path to the local file to copy
+	 * - remoteFile : full path to the destination file (including filename and extension)
+	 * - showProgressDialog : set to false to suppress the Swing progress dialog box while transferring files; default TRUE
+	 * - logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending
+	 * 							  progress is reported (log.info)
+	 * @return true if success
+	 */
 	public boolean copyToRemoteSFTP(def params = [:]) {
 		
 		checkHostAndUser()
@@ -318,7 +360,7 @@ class MrGadget {
 	// SCP
 	
 	/**
-	 * Sends a file to a remote server using SSH scp
+	 * Sends a file to a remote server using SSH SCP
 	 * Params are:
 	 * - localFile: the full path of the local file to send
 	 * - remoteFile: the full path of the file to create on the remote server (including the file name and extension)
@@ -549,6 +591,11 @@ class MrGadget {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// EXEC REMOTE (non-sudo)
 	
+	/**
+	 * Executes a command on a remote server. Host and user should already be set.
+	 * @param command the command to execute
+	 * @return true if success
+	 */
 	public boolean execRemote(String command) {
 
 		checkHostAndUser()
@@ -630,6 +677,11 @@ class MrGadget {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// EXEC REMOTE SUDO
 
+	/**
+	 * Executes a SUDO command on a remote server. Host and user should already be set.
+	 * @param command the command to execute
+	 * @return true if success
+	 */
 	public boolean execRemoteSudo(String command) {
 
 		checkHostAndUser()

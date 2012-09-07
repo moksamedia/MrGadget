@@ -5,7 +5,7 @@ import groovy.util.logging.Slf4j
 import com.jcraft.jsch.UserInfo
 
 @Slf4j
-class MyUserInfo implements UserInfo {
+protected class MyUserInfo implements UserInfo {
 		
 	public String getPassword() { return passwd }
 		

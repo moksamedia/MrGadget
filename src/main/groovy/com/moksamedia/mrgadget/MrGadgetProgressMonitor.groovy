@@ -7,7 +7,7 @@ import java.text.DecimalFormat
 import com.jcraft.jsch.SftpProgressMonitor
 
 @Slf4j
-class MrGadgetProgressMonitor implements SftpProgressMonitor {
+protected class MrGadgetProgressMonitor implements SftpProgressMonitor {
 
 	// constructor 
 	public MrGadgetProgressMonitor(def params = [:]) {

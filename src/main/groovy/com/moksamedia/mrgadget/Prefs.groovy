@@ -4,6 +4,7 @@ import groovy.util.logging.Slf4j
 
 import java.security.KeyStore
 import java.util.prefs.Preferences
+
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor
 
 /**
@@ -12,7 +13,7 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor
  */
 
 @Slf4j
-class Prefs {
+protected class Prefs {
 
 	Preferences prefs
 	KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -108,12 +109,12 @@ class Prefs {
 	protected boolean isFirstLoad() {
 		
 		if (!prefs.getBoolean("PROGRAM_RUN", false)) { // negate here, think of what we're actually storing as "has been run"
-			log.info "IS FIRST LOAD"
+			log.debug "IS FIRST LOAD"
 			prefs.putBoolean("PROGRAM_RUN", true)
 			true
 		}
 		else {
-			log.info "IS NOT FIRST LOAD"
+			log.debug "IS NOT FIRST LOAD"
 			false
 		}
 	}

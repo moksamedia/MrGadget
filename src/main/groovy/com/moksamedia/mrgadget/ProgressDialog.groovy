@@ -12,7 +12,7 @@ import javax.swing.JProgressBar
 import javax.swing.border.EmptyBorder
 
 // Progress bar dialog optionally used when sending files remotely
-class ProgressDialog {
+protected class ProgressDialog {
 	
 	JDialog dlg
 	JProgressBar dpb
