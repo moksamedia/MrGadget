@@ -67,6 +67,36 @@ Add the import statement and the dependency to the gradle buildscript block as s
 
 	}
 
+You could also import directly from the GitHub repo:
+
+	buildscript {
+
+		repositories {
+			mavenCentral()
+			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+				name = 'mrgadget-plugin'
+				basePath = 'https://raw.github.com/moksamedia/mrgadget-gradle-plugin/master/repo'
+				addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+			}
+		}
+
+	  dependencies {
+		classpath 'com_moksamedia:mrgadget:0.2.1:jar-with-dependencies' // OR CURRENT VERSION
+	  }
+
+	}
+
+Of course, all of this assumes you're using MrGadget in the buildscript itself. To simply add his as a dependency to a project all you need is:
+
+	repositories {
+	  mavenCentral()
+	}
+
+	dependencies {
+		compile 'com.moksamedia.mrgadget:mrgadget:0.2.1' // OR CURRENT VERSION
+	}
+
+
 
 # Dependencies
 
