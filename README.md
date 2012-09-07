@@ -47,6 +47,32 @@ Add the import statement and the dependency to the gradle buildscript block as s
 	}
 
 
+The dependencies are:
+
+	groovy 'org.codehaus.groovy:groovy:1.8.6' ext { fatJarExclude = true }	// excluded from fatJar
+	compile 'org.slf4j:slf4j-simple:1.6.3' ext { fatJarExclude = true }		// excluded from fatJar
+	compile 'com.jcraft:jsch:0.1.48'	// JSch is the SSH java package
+	compile 'org.jasypt:jasypt-acegisecurity:1.9.0'	// for encrypting the stored passwords
+
+	<dependency>
+		<groupId>org.jasypt</groupId>
+		<artifactId>jasypt-acegisecurity</artifactId>
+		<version>1.9.0</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.jcraft</groupId>
+		<artifactId>jsch</artifactId>
+		<version>0.1.48</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.6.3</version>
+		<scope>compile</scope>
+	</dependency>
+
 Use him in some tasks!
 
 	task copyToServerOnly << {
