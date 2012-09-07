@@ -60,6 +60,20 @@ Use him in some tasks!
 		mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
 
 	}
+	
+	task copyToServerOnly << {
+	
+		MrGadget mrg = new MrGadget(
+			user:'someuser', 				
+			host:'www.someuser.com', 
+			strictHostKeyChecking:false,	
+			prefsEncryptionKey: someCustomKey) // can specify a custom key to use to encrypt passwords		
+		
+		logger.info "SENDING FILE"
+		mrg.copyToRemoteSFTP(localFile:"$rootDir/build/libs/someapp.war", remoteFile:"/websites/someapp.war")
+
+	}
+	
 
 	task deployToServerAndFix << {
 		

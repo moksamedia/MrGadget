@@ -111,7 +111,7 @@ class MrGadget {
 	 * - logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending
 	 * 							  progress is reported (log.info)
 	 * - clearAllPasswords : if true, all stored passwords will as well as the encryption key will be erased
-	 * - prefsEncryptionPassword : if you would like to use a passed-in encryption password instead of an auto-generated one
+	 * - prefsEncryptionKey : if you would like to use a passed-in encryption password instead of an auto-generated one
 	 */
 	public MrGadget(def params = [:]) {
 		
@@ -131,8 +131,8 @@ class MrGadget {
 		this.logProgressGranularity = params.get('logProgressGranularity', this.logProgressGranularity)
 		boolean clearAllPasswords = params.get('clearAllPasswords', false)
 		
-		if (params.containsKey("prefsEncryptionPassword")) {
-			prefs = new Prefs(val:params.prefsEncryptionPassword, clearAllPasswords:clearAllPasswords) // use passed-in password
+		if (params.containsKey("prefsEncryptionKey")) {
+			prefs = new Prefs(val:params.prefsEncryptionKey, clearAllPasswords:clearAllPasswords) // use passed-in password
 		}
 		else {
 			prefs = new Prefs(val:null, clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
