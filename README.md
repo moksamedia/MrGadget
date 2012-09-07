@@ -33,23 +33,6 @@ MrGadget is a plain-old Groovy library class and there's no reason he can't be u
 ### Use the plugin! https://github.com/moksamedia/mrgadget-gradle-plugin
 ### Or:
 
-Import from Maven Central
-
-	import com.moksamedia.mrgadget.MrGadget
-
-	buildscript {
-	
-	  repositories {
-	    mavenCentral()
-	  }
-    
-	  dependencies {
-		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>'
-	  }
-
-	}
-
-
 Download the jar-with-dependencies
 Add the import statement and the dependency to the gradle buildscript block as shown:
 
@@ -88,6 +71,23 @@ You could also import directly from the GitHub repo:
 	  }
 
 	}
+
+Import from Maven Central (**This appears to be broken for some reason for latest release**)
+
+	import com.moksamedia.mrgadget.MrGadget
+
+	buildscript {
+
+	  repositories {
+	    mavenCentral()
+	  }
+
+	  dependencies {
+		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>'
+	  }
+
+	}
+
 
 Of course, all of this assumes you're using MrGadget in the buildscript itself. To simply add his as a dependency to a project all you need is:
 
