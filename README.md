@@ -9,7 +9,24 @@ MrGadget will use the System.console to prompt the user for necessary passwords,
 
 USAGE WITH GRADLE:
 
-Download the project or jar.
+Import from Maven Central
+
+	import com.moksamedia.mrgadget.MrGadget
+
+	buildscript {
+	
+	  repositories {
+	    mavenCentral()
+	  }
+    
+	  dependencies {
+		classpath 'com.moksamedia.mrgadget:mrgadget:0.2.1' // OR CURRENT VERSION
+	  }
+
+	}
+
+
+Download the jar-with-dependencies
 Add the import statement and the dependency to the gradle buildscript block as shown:
 
 	import com.moksamedia.mrgadget.MrGadget
@@ -19,15 +36,16 @@ Add the import statement and the dependency to the gradle buildscript block as s
 	  repositories {
 	    mavenCentral()
 		flatDir {
-			dirs	"path/to/jar"
+			dirs "path/to/jar"
 		}
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia.mrgadget:mrgadget:0.2'
+		classpath 'com.moksamedia.mrgadget:mrgadget:0.2.1:jar-with-dependencies' // OR CURRENT VERSION
 	  }
 
 	}
+
 
 Use him in some tasks!
 
