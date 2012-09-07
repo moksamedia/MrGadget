@@ -72,8 +72,7 @@ You could also import directly from the GitHub repo:
 
 	}
 
-Import from Maven Central
-NOTE: for some reason, static versioning isn't working on Maven Central for this artifact, but the 'latest.version' tag works
+Import from Maven Central. ***NOTE: for some reason, static versioning isn't working on Maven Central for this artifact, but the 'latest.version' tag works
 
 	import com.moksamedia.mrgadget.MrGadget
 
