@@ -92,6 +92,11 @@ class MrGadget {
 	// sets how often copy progress is logged
 	int logProgressGranularity = 10
 	
+	String password = null, sudoPassword = null, prefsEncryptionKey = null
+	
+	boolean clearAllPasswords = false
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTOR
 	
@@ -120,7 +125,7 @@ class MrGadget {
 		this.user = params.user
 		
 		// set params if specified, otherwise default to values above
-		
+		/*
 		this.leaveSessionOpen = params.get('leaveSessionOpen', this.leaveSessionOpen)
 		this.sudoPassDifferent = params.get('sudoPassDifferent', this.sudoPassDifferent)
 		this.promptToSavePass = params.get('promptToSavePass', this.promptToSavePass)
@@ -131,17 +136,32 @@ class MrGadget {
 		this.logProgressGranularity = params.get('logProgressGranularity', this.logProgressGranularity)
 		boolean clearAllPasswords = params.get('clearAllPasswords', false)
 		
+		password = params.get('password', null)
+		sudoPassword = params.get('sudoPassword', null)
+		
 		if (params.containsKey("prefsEncryptionKey")) {
 			prefs = new Prefs(val:params.prefsEncryptionKey, clearAllPasswords:clearAllPasswords) // use passed-in password
 		}
 		else {
 			prefs = new Prefs(val:null, clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
 		}
+		*/
+		setParams(params)
+		
+		prefs = new Prefs(val:prefsEncryptionKey, clearAllPasswords:clearAllPasswords)
 		
 		// decimal format
 		decFormat = new DecimalFormat("#,##0.00")
 		
 		
+	}
+	
+	public void setParams(def params = [:]) {
+		def toSet = params.findAll { k, v -> k in this.metaClass.properties*.name }
+		toSet.each { propName, val ->
+			log.debug "Setting MrGadget.$propName=$val"
+			this."$propName" = val
+		}
 	}
 
 	
@@ -175,7 +195,7 @@ class MrGadget {
 		session.setUserInfo(ui);
 		
 		// try and get saved password
-		String pass = prefs.getPassword(user, host)
+		String pass = password ?: prefs.getPassword(user, host)
 		
 		// if we have a saved password
 		if (pass != null) {
@@ -369,7 +389,7 @@ class MrGadget {
 	 * - logProgressGranularity: integer percentage; progress is logged according to this size (10 = every 10%, 100 = start and finish)
 	 * @return true if success
 	 */
-	public boolean copyToRemote(def params = [:]) {
+	public boolean copyToRemoteSCP(def params = [:]) {
 
 		checkHostAndUser()
 
@@ -717,7 +737,7 @@ class MrGadget {
 
 			if (sudoPassDifferent) {
 				
-				sudo_pass = prefs.getSudoPassword(user,host)
+				sudo_pass = sudoPassword ?: prefs.getSudoPassword(user,host)
 				
 				if (sudo_pass == null) {
 
