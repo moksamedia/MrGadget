@@ -2,7 +2,7 @@ apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'fatjar'
 
-version='0.2.1'
+version='0.2.2'
 
 buildscript {
     dependencies {
@@ -34,12 +34,12 @@ build << {
 	copy {
 		println "Copying ${jar.archiveName} to base directory"
 		from("$buildDir/libs/${jar.archiveName}")
-		into("$projectDir")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
 	}
 	copy {
 		println "Copying ${fatJar.archiveName} to base directory"
 		from("$buildDir/libs/${fatJar.archiveName}")
-		into("$projectDir")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
 	}
 }
 

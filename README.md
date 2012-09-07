@@ -1,4 +1,4 @@
-DESCRIPTION:
+# Description
 
 MrGadget is a very lightweight utility library designed to do 4 things: 1) send a file to a remote server via SCP, 2) send a file to a remote server via SFTP, 3) execute a command on a remote server, 4) execute a SUDO command on a remote server. It uses the JSch library and leans heavily on the example code on the JSch website. Although MrGadget was built for my use in Gradle, it is a self-contained set of Groovy classes that should be useful anywhere.
 
@@ -6,8 +6,32 @@ File uploading allows progress to be reported via 'log.info' statements or via a
 
 MrGadget will use the System.console to prompt the user for necessary passwords, and there is an option to save these passwords, using encryption, in the system preferences. The encryption scheme is better than plain text, but rather basic, and as this is open-source, NO GUARANTEE is made regarding the security of the encryption. It is certainly better than saving the passwords in plain text in a config file or build file, but an interested person could reverse engineer the key used and discover the password. SO USE THIS FEATURE AT YOUR OWN RISK.
 
+# Usage (in general)
 
-USAGE WITH GRADLE:
+MrGadget is a plain-old Groovy library class and there's no reason he can't be used pretty much anywhere there's a JVM. I just happened to write him for my own use in gradle. Example Groovy usage would be:
+
+	class ReallySimpleClass {
+
+		MrGadget mrg
+	
+		public ReallySimpleClass(String user, String host) {
+			mrg = new MrGadget(user:user, host:host)
+			mrg.strictHostKeyChecking = false
+			mrg.showProgressDialog = false 
+			mrg.logProgressGranularity = 10 // log.info file upload progress every 10%
+		}
+
+		void doIt() {
+			mrg.copyToRemoteSFTP(localFile:'some/local/file.zip', remoteFile:'some/remote/file.zip')
+		}
+
+
+	} 
+
+# Usage with Gradle
+
+### Use the plugin! https://github.com/moksamedia/mrgadget-gradle-plugin
+### Or:
 
 Import from Maven Central
 
@@ -20,7 +44,7 @@ Import from Maven Central
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia:mrgadget:0.2.1' // OR CURRENT VERSION
+		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>'
 	  }
 
 	}
@@ -41,13 +65,43 @@ Add the import statement and the dependency to the gradle buildscript block as s
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia:mrgadget:0.2.1:jar-with-dependencies' // OR CURRENT VERSION
+		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>:jar-with-dependencies' // OR CURRENT VERSION
 	  }
 
 	}
 
+You could also import directly from the GitHub repo:
 
-The dependencies are:
+	buildscript {
+
+		repositories {
+			mavenCentral()
+			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+				name = 'mrgadget-plugin'
+				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
+				addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+			}
+		}
+
+	  dependencies {
+		classpath 'com_moksamedia:mrgadget:<DESIRED-VERSION>:jar-with-dependencies'
+	  }
+
+	}
+
+Of course, all of this assumes you're using MrGadget in the buildscript itself. To simply add his as a dependency to a project all you need is:
+
+	repositories {
+	  mavenCentral()
+	}
+
+	dependencies {
+		compile 'com.moksamedia.mrgadget:mrgadget:<DESIRED-VERSION>'
+	}
+
+
+
+# Dependencies
 
 	groovy 'org.codehaus.groovy:groovy:1.8.6' ext { fatJarExclude = true }	// excluded from fatJar
 	compile 'org.slf4j:slf4j-simple:1.6.3' ext { fatJarExclude = true }		// excluded from fatJar
@@ -73,7 +127,7 @@ The dependencies are:
 		<scope>compile</scope>
 	</dependency>
 
-Use him in some tasks!
+# Use him in some tasks!
 
 	task copyToServerOnly << {
 	
