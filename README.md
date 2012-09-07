@@ -61,7 +61,7 @@ Use him in some tasks!
 
 	}
 	
-	task copyToServerOnly << {
+	task copyToServerOnlyWithCustomKey << {
 	
 		MrGadget mrg = new MrGadget(
 			user:'someuser', 				
