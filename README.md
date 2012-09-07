@@ -48,7 +48,7 @@ Add the import statement and the dependency to the gradle buildscript block as s
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>:jar-with-dependencies' // OR CURRENT VERSION
+		classpath 'com.moksamedia:mrgadget:<DOWNLOADED-VERSION>:jar-with-dependencies' // OR CURRENT VERSION
 	  }
 
 	}
@@ -72,7 +72,8 @@ You could also import directly from the GitHub repo:
 
 	}
 
-Import from Maven Central (**This appears to be broken for some reason for latest release**)
+Import from Maven Central
+NOTE: for some reason, static versioning isn't working on Maven Central for this artifact, but the 'latest.version' tag works
 
 	import com.moksamedia.mrgadget.MrGadget
 
@@ -83,7 +84,9 @@ Import from Maven Central (**This appears to be broken for some reason for lates
 	  }
 
 	  dependencies {
-		classpath 'com.moksamedia:mrgadget:<DESIRED-VERSION>'
+		classpath 'com.moksamedia:mrgadget:latest.version:jar-with-dependencies'
+		// or for 'light' jar: classpath 'com.moksamedia:mrgadget:latest.version'
+		// but you'll have to add the dependencies to your build if they're not already present
 	  }
 
 	}
@@ -96,7 +99,7 @@ Of course, all of this assumes you're using MrGadget in the buildscript itself. 
 	}
 
 	dependencies {
-		compile 'com.moksamedia.mrgadget:mrgadget:<DESIRED-VERSION>'
+		classpath 'com.moksamedia:mrgadget:latest.version:jar-with-dependencies'
 	}
 
 
