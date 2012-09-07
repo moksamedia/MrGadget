@@ -6,6 +6,27 @@ File uploading allows progress to be reported via 'log.info' statements or via a
 
 MrGadget will use the System.console to prompt the user for necessary passwords, and there is an option to save these passwords, using encryption, in the system preferences. The encryption scheme is better than plain text, but rather basic, and as this is open-source, NO GUARANTEE is made regarding the security of the encryption. It is certainly better than saving the passwords in plain text in a config file or build file, but an interested person could reverse engineer the key used and discover the password. SO USE THIS FEATURE AT YOUR OWN RISK.
 
+# Usage (in general)
+
+MrGadget is a plain-old Groovy library class and there's no reason he can't be used pretty much anywhere there's a JVM. I just happened to write him for my own use in gradle. Example Groovy usage would be:
+
+class ReallySimpleClass {
+
+	MrGadget mrg
+	
+	public ReallySimpleClass(String user, String host) {
+		mrg = new MrGadget(user:user, host:host)
+		mrg.strictHostKeyChecking = false
+		mrg.showProgressDialog = false 
+		mrg.logProgressGranularity = 10 // log.info file upload progress every 10%
+	}
+
+	void doIt() {
+		mrg.copyToRemoteSFTP(localFile:'some/local/file.zip', remoteFile:'some/remote/file.zip')
+	}
+
+
+} 
 
 # Usage with Gradle
 
