@@ -20,7 +20,7 @@ Import from Maven Central
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia.mrgadget:mrgadget:0.2.1' // OR CURRENT VERSION
+		classpath 'com.moksamedia:mrgadget:0.2.1' // OR CURRENT VERSION
 	  }
 
 	}
@@ -41,7 +41,7 @@ Add the import statement and the dependency to the gradle buildscript block as s
 	  }
     
 	  dependencies {
-		classpath 'com.moksamedia.mrgadget:mrgadget:0.2.1:jar-with-dependencies' // OR CURRENT VERSION
+		classpath 'com.moksamedia:mrgadget:0.2.1:jar-with-dependencies' // OR CURRENT VERSION
 	  }
 
 	}
