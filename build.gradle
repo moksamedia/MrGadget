@@ -34,12 +34,12 @@ build << {
 	copy {
 		println "Copying ${jar.archiveName} to base directory"
 		from("$buildDir/libs/${jar.archiveName}")
-		into("$projectDir")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
 	}
 	copy {
 		println "Copying ${fatJar.archiveName} to base directory"
 		from("$buildDir/libs/${fatJar.archiveName}")
-		into("$projectDir")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
 	}
 }
 
