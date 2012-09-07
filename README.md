@@ -10,23 +10,23 @@ MrGadget will use the System.console to prompt the user for necessary passwords,
 
 MrGadget is a plain-old Groovy library class and there's no reason he can't be used pretty much anywhere there's a JVM. I just happened to write him for my own use in gradle. Example Groovy usage would be:
 
-class ReallySimpleClass {
+	class ReallySimpleClass {
 
-	MrGadget mrg
+		MrGadget mrg
 	
-	public ReallySimpleClass(String user, String host) {
-		mrg = new MrGadget(user:user, host:host)
-		mrg.strictHostKeyChecking = false
-		mrg.showProgressDialog = false 
-		mrg.logProgressGranularity = 10 // log.info file upload progress every 10%
-	}
+		public ReallySimpleClass(String user, String host) {
+			mrg = new MrGadget(user:user, host:host)
+			mrg.strictHostKeyChecking = false
+			mrg.showProgressDialog = false 
+			mrg.logProgressGranularity = 10 // log.info file upload progress every 10%
+		}
 
-	void doIt() {
-		mrg.copyToRemoteSFTP(localFile:'some/local/file.zip', remoteFile:'some/remote/file.zip')
-	}
+		void doIt() {
+			mrg.copyToRemoteSFTP(localFile:'some/local/file.zip', remoteFile:'some/remote/file.zip')
+		}
 
 
-} 
+	} 
 
 # Usage with Gradle
 
