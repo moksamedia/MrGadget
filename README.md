@@ -31,6 +31,7 @@ MrGadget is a plain-old Groovy library class and there's no reason he can't be u
 # Usage with Gradle
 
 ### Use the plugin! https://github.com/moksamedia/mrgadget-gradle-plugin
+### Or:
 
 Import from Maven Central
 
