@@ -83,6 +83,7 @@ class MrGadget {
 	
 	boolean clearAllPasswords = false
 	
+	String version = "NONE SUPPLIED"
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTOR
@@ -108,28 +109,6 @@ class MrGadget {
 		this.host = params.host
 		this.user = params.user
 		
-		// set params if specified, otherwise default to values above
-		/*
-		this.leaveSessionOpen = params.get('leaveSessionOpen', this.leaveSessionOpen)
-		this.sudoPassDifferent = params.get('sudoPassDifferent', this.sudoPassDifferent)
-		this.promptToSavePass = params.get('promptToSavePass', this.promptToSavePass)
-		this.strictHostKeyChecking = params.get('strictHostKeyChecking', this.strictHostKeyChecking)
-		// copy to remote options
-		this.showProgressDialog = params.get('showProgressDialog', this.showProgressDialog)
-		this.preserveTimestamp = params.get('preserveTimestamp', this.preserveTimestamp)
-		this.logProgressGranularity = params.get('logProgressGranularity', this.logProgressGranularity)
-		boolean clearAllPasswords = params.get('clearAllPasswords', false)
-		
-		password = params.get('password', null)
-		sudoPassword = params.get('sudoPassword', null)
-		
-		if (params.containsKey("prefsEncryptionKey")) {
-			prefs = new Prefs(val:params.prefsEncryptionKey, clearAllPasswords:clearAllPasswords) // use passed-in password
-		}
-		else {
-			prefs = new Prefs(val:null, clearAllPasswords:clearAllPasswords) // null: uses generated pass or loads it
-		}
-		*/
 		setParams(params)
 		
 		prefs = new Prefs(val:prefsEncryptionKey, clearAllPasswords:clearAllPasswords)
@@ -137,6 +116,9 @@ class MrGadget {
 		// decimal format
 		decFormat = new DecimalFormat("#,##0.00")
 		
+		version = getClass().getResourceAsStream("version").text
+		
+		log.info "Using MrGadget version $version"
 		
 	}
 	
