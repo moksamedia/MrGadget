@@ -1,17 +1,6 @@
 package com.moksamedia.mrgadget
 
-import groovy.util.logging.Slf4j
-
-import java.awt.BorderLayout
-import java.awt.Font
 import java.text.DecimalFormat
-
-import javax.swing.BoxLayout
-import javax.swing.JDialog
-import javax.swing.JLabel
-import javax.swing.JPanel
-import javax.swing.JProgressBar
-import javax.swing.border.EmptyBorder
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -23,9 +12,7 @@ import com.jcraft.jsch.JSch
 import com.jcraft.jsch.JSchException
 import com.jcraft.jsch.Session
 import com.jcraft.jsch.SftpException
-import com.jcraft.jsch.SftpProgressMonitor
 import com.jcraft.jsch.UserInfo
-
 
 /**
  * MrGadget offers four services:
@@ -103,20 +90,17 @@ class MrGadget {
 	/**
 	 * Default Constructor
 	 * 
-	 * Params are passed in as a Map.
-	 * - host : host name or ip address of remote server (REQUIRED to connect, but can be set post-constructor)
-	 * - user : username used to connect to remote server (REQUIRED to connect, but can be set post-constructor)
-	 * - leaveSessionOpen : if multiple commands are to be executed, this can be used to avoid having to re-connect
-	 * 						for each action; default FALSE
-	 * - sudoPassDifferent : set to true if the sudo password is different than the user login password; default FALSE
-	 * - promptToSavePass : set to false if you don't want MrG to prompt you to save your password; default TRUE
-	 * - strictHostKeyChecking : set to false to disable strict host key checking; defaults to TRUE
-	 * - showProgressDialog : set to false to suppress the Swing progress dialog box while transferring files; default TRUE
-	 * - preserveTimestamp : set to true to preserve timestamp of file copied to remote server; default FALSE
-	 * - logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending
-	 * 							  progress is reported (log.info)
-	 * - clearAllPasswords : if true, all stored passwords will as well as the encryption key will be erased
-	 * - prefsEncryptionKey : if you would like to use a passed-in encryption password instead of an auto-generated one
+	 * @param host host name or ip address of remote server (REQUIRED to connect, but can be set post-constructor)
+	 * @param user username used to connect to remote server (REQUIRED to connect, but can be set post-constructor)
+	 * @param leaveSessionOpen if multiple commands are to be executed, this can be used to avoid having to re-connect for each action; default FALSE
+	 * @param sudoPassDifferent set to true if the sudo password is different than the user login password; default FALSE
+	 * @param promptToSavePass set to false if you don't want MrG to prompt you to save your password; default TRUE
+	 * @param strictHostKeyChecking set to false to disable strict host key checking; defaults to TRUE
+	 * @param showProgressDialog set to false to suppress the Swing progress dialog box while transferring files; default TRUE
+	 * @param preserveTimestamp set to true to preserve timestamp of file copied to remote server; default FALSE
+	 * @param logProgressGranularity an int between 0 - 100 that controls how often, in percentage, the file sending progress is reported (log.info)
+	 * @param clearAllPasswords if true, all stored passwords will as well as the encryption key will be erased
+	 * @param prefsEncryptionKey if you would like to use a passed-in encryption password instead of an auto-generated one
 	 */
 	public MrGadget(def params = [:]) {
 		
@@ -285,13 +269,120 @@ class MrGadget {
 	}
 
 	/**
+	 * Copy a file to a remote server using rsync.
+	 * 
+	 * @param localFile the full path to the local file to send
+	 * @param remoteFile the full path to the remote file to create
+	 * @param progress report progress on command line (log.info) while sending file
+	 * @param partial allows resumption of partial uploads
+	 * @param owner set the owner of the remote file (REQUIRES SUDO -- see docs)
+	 * @param group set the group of the remote file (REQUIRES SUDO -- see docs)
+	 * @param chmod set the permissions of the remote file (REQUIRES SUDO -- see docs)
+	 * @param numericIds use numeric group and user ids instead of names
+	 * @param rsyncPathLocal the path to the local rsync command (defaults to '/usr/bin/rsync')
+	 * @param rsyncPathRemote the path to the rsync command on the remote server (if using sudo and setting custom path, must use sudo rsync)
+	 * @param additionalArgs any additional arguments to include (as a list of strings, NOT a single string)
+	 * @return true if success
+	 */
+	public boolean copyToRemoteRSYNC(def params = [:]) {
+		
+		checkHostAndUser()
+		
+		String owner = params.owner
+		String group = params.group
+		String chmod = params.chmod
+		boolean numericIds = params.get('numericIds', false)
+		String rsyncPathRemote = params.rsyncPath
+		String rsyncPathLocal = params.get('rsyncPathLocal', '/usr/bin/rsync')
+		boolean progress = params.get('progress', true)
+		boolean partial = params.get('partial', false)
+		String localFile = params.localFile
+		String remoteFile = params.remoteFile
+		
+		def additionalArgs = params.additionalArgs
+		
+		// reality check: we need a local file and a remote file
+		if (!params.containsKey('localFile') || !params.containsKey('remoteFile')) {
+			log.error("Error: remoteFile and localFile must be specified. localFile=$params.localFile, remoteFile=$params.remoteFile")
+			throw new RuntimeException("Error: remoteFile and localFile must be specified. localFile=$params.localFile, remoteFile=$params.remoteFile")
+			return false
+		}
+
+		if (rsyncPathLocal.toLowerCase() == 'auto') rsyncPathLocal = 'which rsync'.execute().text.trim()
+				
+		log.info "Using rsync: $rsyncPathLocal"
+		
+		def command = ["$rsyncPathLocal".toString()]
+		
+		if (numericIds) command += '--numeric-ids'
+		
+		if (chmod!=null) command += "--chmod=$chmod".toString(); command +='--perms'
+		if (group!=null) command += "--group=$group".toString()
+		if (owner!=null) command += "--owner=$owner".toString()
+		
+		/*
+		 * NOTE: I was having a lot of trouble getting the rsync-path to work property when building the command
+		 * as an array (it worked fine as a string). The error I was getting was: "bash: sudo rsync: command not found".
+		 * This was caused by the bash shell interpreting 'sudo rsync' as a single token. Strang. Not sure why
+		 * this happens, but the solution was to NOT QUOTE the sudo rsync part of the argument.
+		 * YES -> "--rsync-path=sudo rsync"
+		 * NO -> "--rsync-path=\"sudo rsync\""
+		 * 
+		 */
+		
+		if (rsyncPathRemote!=null) command += "--rsync-path=$rsyncPathRemote".toString()
+		else if (chmod!=null || group!=null || owner!=null) command += "--rsync-path=sudo rsync".toString()
+		
+		if (partial	) command += '--partial'.toString()
+		if (progress!=null) command += '--progress'.toString()
+		
+		if (additionalArgs != null) command += additionalArgs
+		
+		command += "$localFile".toString()
+		command += "${user}@${host}:${remoteFile}".toString()
+		
+		String cmdString = command.inject("") {acc, val -> acc += val+" "; acc} 		
+		
+		log.info "RSYNC COMMAND: $cmdString"
+		
+		Closure getPercent = { String val ->
+			
+			String result = ""
+			def vals = val.split()
+			
+			if (vals.size() == 4) {
+				result = vals[1].replaceAll('%','')
+			}
+
+			if (result == "") return -1
+			else return result as int			
+		}
+		
+		// this allows us to see the output from the command as it executes
+		Closure executeProc = { def cmd ->
+			def proc = cmd.execute()
+
+			proc.in.eachLine {line ->
+				if (progress && getPercent(line) % logProgressGranularity == 0) log.info line
+			}
+
+			log.info proc.err.text
+
+			def exitVal = proc.exitValue()
+			log.info "exit value: $exitVal"
+			exitVal
+		}
+		
+		executeProc(command) == 0 // return true if success
+		
+	}
+	
+	/**
 	 * Copies a file to a remote server using SFTP
-	 * Params are stored in a Map
-	 * - localFile : full path to the local file to copy
-	 * - remoteFile : full path to the destination file (including filename and extension)
-	 * - showProgressDialog : set to false to suppress the Swing progress dialog box while transferring files; default TRUE
-	 * - logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending
-	 * 							  progress is reported (log.info)
+	 * @param localFile : full path to the local file to copy
+	 * @param remoteFile : full path to the destination file (including filename and extension)
+	 * @param showProgressDialog : set to false to suppress the Swing progress dialog box while transferring files; default TRUE
+	 * @param logProgressGranularity : an int between 0 - 100 that controls how often, in percentage, the file sending progress is reported (log.info)
 	 * @return true if success
 	 */
 	public boolean copyToRemoteSFTP(def params = [:]) {
@@ -381,12 +472,11 @@ class MrGadget {
 	
 	/**
 	 * Sends a file to a remote server using SSH SCP
-	 * Params are:
-	 * - localFile: the full path of the local file to send
-	 * - remoteFile: the full path of the file to create on the remote server (including the file name and extension)
-	 * - showProgressDialog: show the Swing dialog with the progress bar (closing the dialog does NOT abort the operation)
-	 * - preserveTimestamp: file copied to remote destination has same timestamp as local file
-	 * - logProgressGranularity: integer percentage; progress is logged according to this size (10 = every 10%, 100 = start and finish)
+	 * @param localFile: the full path of the local file to send
+	 * @param remoteFile: the full path of the file to create on the remote server (including the file name and extension)
+	 * @param showProgressDialog: show the Swing dialog with the progress bar (closing the dialog does NOT abort the operation)
+	 * @param preserveTimestamp: file copied to remote destination has same timestamp as local file
+	 * @param logProgressGranularity: integer percentage; progress is logged according to this size (10 = every 10%, 100 = start and finish)
 	 * @return true if success
 	 */
 	public boolean copyToRemoteSCP(def params = [:]) {
@@ -708,6 +798,8 @@ class MrGadget {
 		
 		String sudo_pass = null
 
+		command = "sudo -S -p '' " + command
+		
 		log.info "Executing command '$command' for ${user}@${host}"
 
 		try {
@@ -721,7 +813,7 @@ class MrGadget {
 			//       standard input instead of the terminal device.
 			//   -p  The -p (prompt) option allows you to override the default
 			//       password prompt and use a custom one.
-			((ChannelExec)channel).setCommand("sudo -S -p '' "+command);
+			((ChannelExec)channel).setCommand(command);
 
 			InputStream input = channel.getInputStream();
 			OutputStream out = channel.getOutputStream();
