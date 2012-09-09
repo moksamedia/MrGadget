@@ -117,7 +117,8 @@ class MrGadget {
 		decFormat = new DecimalFormat("#,##0.00")
 		
 		version = getClass().getResourceAsStream("/version")?.text
-				
+	
+		log.info "Using MrGadget version $version"			
 	}
 	
 	public void setParams(def params = [:]) {
@@ -145,7 +146,7 @@ class MrGadget {
 		
 		session = jsch.getSession(user, host, 22);
 
-		log.info "********** MrGadget ($version) Session Created **********"
+		log.info "********** MrGadget v$version Session Created **********"
 		
 		if (strictHostKeyChecking) {
 			log.debug "Strict host key checking is ON"
