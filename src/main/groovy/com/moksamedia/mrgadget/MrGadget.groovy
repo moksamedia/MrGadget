@@ -116,7 +116,7 @@ class MrGadget {
 		// decimal format
 		decFormat = new DecimalFormat("#,##0.00")
 		
-		version = getClass().getResourceAsStream("version").text
+		version = getClass().getResourceAsStream("/version")?.text
 				
 	}
 	
