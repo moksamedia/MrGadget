@@ -16,7 +16,7 @@ protected class MyUserInfo implements UserInfo {
 		if (console) {
 			response = console.readLine("> $str (y/n): ")
 		} else {
-			println "Cannot get console."
+			log.error "Cannot get console."
 		}
 
 		return response == 'y' || response == 'Y' || response == 'yes' || response == 'Yes'
@@ -24,7 +24,10 @@ protected class MyUserInfo implements UserInfo {
   
 	String passwd
 	
-	public String getPassphrase(){ return null; }
+	public String getPassphrase(){ 
+		log.error "Trying to get passphrase: why?"
+		null
+	}
 	
 	public boolean promptPassphrase(String message){ return true }
 	

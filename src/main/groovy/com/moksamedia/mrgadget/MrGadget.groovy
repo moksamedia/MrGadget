@@ -46,6 +46,8 @@ class MrGadget {
 	String user
 	Session session
 	
+	int port = 22
+	
 	JSch jsch = new JSch()
 	Prefs prefs
 	UserInfo ui = new MyUserInfo()
@@ -78,12 +80,17 @@ class MrGadget {
 	
 	// sets how often copy progress is logged
 	int logProgressGranularity = 10
-	
+		
 	String password = null, sudoPassword = null, prefsEncryptionKey = null
 	
 	boolean clearAllPasswords = false
 	
 	String version = "NONE SUPPLIED"
+	
+	String commandUsed = ''
+	String standardOutput = ''
+	String errorOutput = ''
+	String exitStatus = ''
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTOR
@@ -122,13 +129,19 @@ class MrGadget {
 	}
 	
 	public void setParams(def params = [:]) {
-		def toSet = params.findAll { k, v -> k in this.metaClass.properties*.name }
+		def toSet = params.findAll { k, v -> k in this.metaClass.properties*.name && k != 'class' && k != 'metaClass'}
 		toSet.each { propName, val ->
 			log.debug "Setting MrGadget.$propName=$val"
 			this."$propName" = val
 		}
 	}
 
+	Closure clearOutputs = {
+		standardOutput = ''
+		errorOutput = ''
+		exitStatus = ''
+		commandUsed = ''
+	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CREATE SESSION
@@ -141,10 +154,12 @@ class MrGadget {
 	// create a session and connect to host
 	Closure createSession = {
 		
+		clearOutputs() // createSession is called before every execution, so this will always clear outputs
+		
 		// don't connect if we already have a session
 		if (session?.isConnected()) return
 		
-		session = jsch.getSession(user, host, 22);
+		session = jsch.getSession(user, host, port);
 
 		log.info "********** MrGadget v$version Session Created **********"
 		
@@ -154,17 +169,28 @@ class MrGadget {
 		}
 		else {
 			log.debug "Strict host key checking is OFF"
-			session.setConfig("StrictHostKeyChecking", "no");
+			session.setConfig("StrictHostKeyChecking", "no")
 		}
 
-		session.setUserInfo(ui);
+		session.setUserInfo(ui)
 		
-		// try and get saved password
-		String pass = password ?: prefs.getPassword(user, host)
+		ui.promptYesNo('Did this work?')
 		
+		String pass 
+		
+		// check for provided password
+		if (password != null) {
+			pass = password
+			log.info "Using provided password ($pass) for ${user}@${host}"
+		}
+		//check for saved password
+		else {
+			pass = prefs.getPassword(user, host)
+			if (pass != null) log.info "Using saved password for ${user}@${host}"
+		}
+						
 		// if we have a saved password
 		if (pass != null) {
-			log.debug "Using saved password for ${user}@${host}"
 			session.setPassword(pass)
 			ui.passwd = pass // put the password in the ui so that if we're running a sudo command we can get it out later
 			session.connect()
@@ -221,7 +247,7 @@ class MrGadget {
 		else {
 			log.error("Error attempting to execute command!", e)
 		}
-		throw new RuntimeException("Error attempting to execute sudo command!", e)
+		throw new RuntimeException("Error attempting to execute command!", e)
 	}
 		
 	
@@ -322,7 +348,7 @@ class MrGadget {
 		command += "$localFile".toString()
 		command += "${user}@${host}:${remoteFile}".toString()
 		
-		String cmdString = command.inject("") {acc, val -> acc += val+" "; acc} 		
+		commandUsed = command.inject("") {acc, val -> acc += val+" "; acc} 		
 		
 		log.info "RSYNC COMMAND: $cmdString"
 		
@@ -430,6 +456,8 @@ class MrGadget {
 			
 			log.info "Finished sending file!"
 
+			commandUsed = "sftp $localFilePath $remoteFilePath"
+			
 			sftpChannel.exit()
 
 			if (!leaveSessionOpen) session.disconnect()
@@ -530,12 +558,13 @@ class MrGadget {
 			createSession()
 			
 			// set the command and open the channel
-			String command = "scp " + (preserveTimestamp ? "-p" :"") +" -t "+remoteFilePath;
-			Channel channel = session.openChannel("exec");
+			String command = 'scp ' + (preserveTimestamp ? '-p' :'') + ' -t ' + remoteFilePath
+			Channel channel = session.openChannel('exec');
 			((ChannelExec)channel).setCommand(command);
 			
 			log.debug command
-
+			commandUsed += command
+			
 			// get I/O streams for remote scp
 			OutputStream out = channel.getOutputStream();
 			InputStream input = channel.getInputStream();
@@ -569,6 +598,7 @@ class MrGadget {
 				command += (" "+(localFile.lastModified()/1000)+" 0\n")
 				
 				log.debug command
+				commandUsed += command
 				
 				out.write(command.getBytes())
 				out.flush()
@@ -589,10 +619,11 @@ class MrGadget {
 				command += localFilePath
 			}
 			
-			log.debug command
+			log.info command
+			commandUsed += ' ' + command
 			
 			command += "\n"
-						
+				
 			out.write(command.getBytes())
 			out.flush()
 			
@@ -691,9 +722,7 @@ class MrGadget {
 
 		checkHostAndUser()
 		
-		String sudo_pass = null
-
-		log.info "Executing SUDO command '$command' for ${user}@${host}"
+		log.info "Executing command '$command' for ${user}@${host}"
 
 		try {
 
@@ -719,18 +748,21 @@ class MrGadget {
 			String str = ""
 			String error = ""
 
+			commandUsed = command
+			
 			while(true) {
 
-				while(input.available()>0) {
+				while(input.available()>0){
 					int i=input.read(tmp, 0, 1024)
+					if(i<0)break
 					str += new String(tmp, 0, i)
-					if (i<0) break
+					log.info str
 				}
 
-				while(err.available()>0) {
+				while(err.available()>0){
 					int i=err.read(tmp, 0, 1024)
+					if(i<0)break
 					error += new String(tmp, 0, i)
-					if (i<0) break
 				}
 
 				if (error != '') {
@@ -744,14 +776,19 @@ class MrGadget {
 				}
 
 				log.info "Waiting for response from $host."
-				
+
 				try{Thread.sleep(1000);}catch(Exception ee){}
 			}
 
 			if (str!="") log.info("Output from $host:\n" + str)
 			else log.info "No output."
-
-			log.info("exit-status: "+channel.getExitStatus())
+			
+			standardOutput = str
+			errorOutput = error
+			exitStatus = channel.getExitStatus()
+			
+			log.info("exit-status: "+exitStatus)
+			
 			
 			channel.disconnect()
 			if (!leaveSessionOpen) session.disconnect()
@@ -782,7 +819,9 @@ class MrGadget {
 		command = "sudo -S -p '' " + command
 		
 		log.info "Executing command '$command' for ${user}@${host}"
-
+		
+		log.info "commandUsed = $commandUsed"
+		
 		try {
 
 			createSession()
@@ -800,6 +839,8 @@ class MrGadget {
 			OutputStream out = channel.getOutputStream();
 			InputStream err = ((ChannelExec)channel).getErrStream()
 
+			commandUsed = command
+			
 			log.info "Connecting to ${user}@${host}"
 			channel.connect();
 
@@ -847,16 +888,17 @@ class MrGadget {
 
 			while(true) {
 
-				while(input.available()>0) {
+				while(input.available()>0){
 					int i=input.read(tmp, 0, 1024)
+					if(i<0)break
 					str += new String(tmp, 0, i)
-					if (i<0) break
+					log.info str
 				}
 
-				while(err.available()>0) {
+				while(err.available()>0){
 					int i=err.read(tmp, 0, 1024)
+					if(i<0)break
 					error += new String(tmp, 0, i)
-					if (i<0) break
 				}
 
 				if (error.contains('try again')) {
@@ -882,7 +924,12 @@ class MrGadget {
 			if (str!="") log.info("Output from $host:\n" + str)
 			else log.info "No output."
 			
-			log.info("exit-status: "+channel.getExitStatus())
+			standardOutput = str
+			errorOutput = error
+			exitStatus = channel.getExitStatus()
+			
+			log.info("exit-status: "+exitStatus)
+			
 			
 			channel.disconnect()
 			if (!leaveSessionOpen) session.disconnect()
