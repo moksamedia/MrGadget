@@ -152,7 +152,7 @@ class MrGadgetTest {
 	}
 	
 	//@Ignore	
-	@Ignore
+	@Test
 	void testExecRemote() {
 		
 		String user = 'testuser'
@@ -182,14 +182,14 @@ class MrGadgetTest {
 		mrg.execRemote('ls sshtest')
 		
 		mrg.commandUsed.trim() == 'ls sshtest'
-		assert mrg.standardOutput.replaceAll('\n', ' ').trim() == 'localfile.txt testfile1.txt testfile2.txt'
+		assert mrg.standardOutput.replaceAll('\n', ' ').trim() == 'remotefile.txt testfile1.txt testfile2.txt'
 		assert mrg.errorOutput == ''
 		
 		mrg.closeSession()
 
 	}
 
-	@Ignore
+	@Test
 	void testExecRemoteSudo() {
 					
 		String user = 'testuser'
@@ -216,12 +216,8 @@ class MrGadgetTest {
 		
 		mrg.ui = new TestUserInfo()
 		
-		try {
-			mrg.execRemoteSudo('ls stupid')
-		}
-		catch (java.lang.RuntimeException ex) {
-			assert ex.getCause().message == 'Unable to execute sudo command. Wrong password.'
-		}
+		mrg.execRemoteSudo('ls stupid')
+		assert mrg.standardOutput.trim() == "sudo -S -p '' ls stupid"
 		assert mrg.commandUsed.trim() == "sudo -S -p '' ls stupid"
 		assert mrg.errorOutput == ''
 		
@@ -230,13 +226,13 @@ class MrGadgetTest {
 	}
 
 
-	@Ignore
+	@Test
 	void testSCP() {
 
 		String user = 'testuser'
 		String host = 'localhost'
 		String password = 'testuser'
-		boolean leaveSessionOpen = true
+		boolean leaveSessionOpen = false
 		boolean strictHostKeyChecking = false
 		
 		String localFile = 'sshtest/testfile1.txt'
@@ -245,12 +241,7 @@ class MrGadgetTest {
 		
 		File from = new File(localFile)
 		localFile = from.getAbsolutePath()
-		
-		File to = new File(remoteFile)
-		to.write('replaceing text')
-
-		remoteFile = to.getAbsolutePath()
-		
+				
 		def params = [
 			user:user,
 			host:host,
@@ -279,18 +270,24 @@ class MrGadgetTest {
 		mrg.closeSession()
 		
 		log.info mrg.commandUsed
-		//assert mrg.commandUsed.trim() == 'scp  -t sshtest/remotefile.txt C0644 3735 testfile1.txt'
+		assert mrg.commandUsed.trim() == 'scp  -t sshtest/remotefile.txt C0644 3735 testfile1.txt'
 		assert mrg.errorOutput == ''
 
 		from = new File(localFile)
-		to = new File(remoteFile)
 		
+		/*
+		 * Locally SCP doesn't seem to respect the -t option and just copies the file
+		 * with the same name to the base directory of the project. Works remotely, though.
+		 * 
+		 */
+		File to = new File('testfile1.txt')		
 		assert from.text == to.text
+		to.delete()
 		
 	}
 
 
-	@Ignore
+	@Test
 	void testSFTP() {
 
 		String user = 'testuser'
@@ -334,7 +331,7 @@ class MrGadgetTest {
 		assert mrg.commandUsed.trim() == 'sftp sshtest/testfile2.txt sshtest/remotefile.txt'
 		assert mrg.errorOutput == ''
 
-		from = new File(localFile)
+		File from = new File(localFile)
 		to = new File(remoteFile)
 		assert from.text == to.text
 		
@@ -391,7 +388,12 @@ public class TestEchoShellFactory extends EchoShellFactory {
 
 public class TestCommandFactory implements CommandFactory {
 	public Command createCommand(String command) {
-		return new ProcessShellFactory(command.split(' ')).create();
+		if (command.contains('sudo')) {
+			new ProcessShellFactory(['echo', "$command"] as String[]).create()
+		}
+		else {
+			new ProcessShellFactory(command.split(' ')).create()
+		}
 		//return new ProcessShellFactory(['echo', "$command"] as String[]).create();
 	}
 }
@@ -446,7 +448,6 @@ public class EchoShellFactory implements Factory<Command> {
 			}
 	
 			public void start(Environment env) throws IOException {
-				log.info "STARTING ECHO SHELL!!!!!!"
 				environment = env;
 				thread = new Thread(this, "EchoShell");
 				thread.start();
