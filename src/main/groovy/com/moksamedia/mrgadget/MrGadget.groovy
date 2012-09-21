@@ -50,7 +50,7 @@ class MrGadget {
 	
 	JSch jsch = new JSch()
 	Prefs prefs
-	UserInfo ui = new MyUserInfo()
+	UserInfo ui
 	
 	DecimalFormat decFormat
 	
@@ -112,6 +112,8 @@ class MrGadget {
 	 */
 	public MrGadget(def params = [:]) {
 		
+		ui = new MyUserInfo()
+		
 		// set host and user, if supplied
 		this.host = params.host
 		this.user = params.user
@@ -131,7 +133,7 @@ class MrGadget {
 	public void setParams(def params = [:]) {
 		def toSet = params.findAll { k, v -> k in this.metaClass.properties*.name && k != 'class' && k != 'metaClass'}
 		toSet.each { propName, val ->
-			log.debug "Setting MrGadget.$propName=$val"
+			log.info "Setting MrGadget.$propName=$val"
 			this."$propName" = val
 		}
 	}
@@ -158,7 +160,7 @@ class MrGadget {
 		
 		// don't connect if we already have a session
 		if (session?.isConnected()) return
-		
+				
 		session = jsch.getSession(user, host, port);
 
 		log.info "********** MrGadget v$version Session Created **********"

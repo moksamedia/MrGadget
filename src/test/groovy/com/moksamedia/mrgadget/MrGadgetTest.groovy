@@ -33,6 +33,15 @@ class MrGadgetTest {
 	static int port = 50000
 
 	@Test
+	void testPassword() {
+		
+		MrGadget mrg = new MrGadget(user:'cantgetnosleep', host:'www.moksamedia.com', strictHostKeyChecking:false, leaveSessionOpen:true)
+		mrg.copyToRemoteSFTP(localFile:"/Users/ach857/java/blograt/build/libs/blograt.war", remoteFile:"/websites/todeploy/temp.war")
+		mrg.closeSession()
+		
+	}
+	
+	@Test
 	void testSetParams() {
 		
 		MrGadget mrg = new MrGadget()
