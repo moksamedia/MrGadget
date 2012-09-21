@@ -173,9 +173,7 @@ class MrGadget {
 		}
 
 		session.setUserInfo(ui)
-		
-		ui.promptYesNo('Did this work?')
-		
+				
 		String pass 
 		
 		// check for provided password
