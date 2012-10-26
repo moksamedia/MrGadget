@@ -350,7 +350,7 @@ class MrGadget {
 		
 		commandUsed = command.inject("") {acc, val -> acc += val+" "; acc} 		
 		
-		log.info "RSYNC COMMAND: $cmdString"
+		log.info "RSYNC COMMAND: $commandUsed"
 		
 		Closure getPercent = { String val ->
 			
