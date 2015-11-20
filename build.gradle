@@ -3,6 +3,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 version='0.3.0'
 
+archivesBaseName = "mrgadget"
+
 buildscript {
     repositories {
         jcenter()
