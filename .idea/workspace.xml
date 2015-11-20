@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0359ed9b-e32c-46fa-af89-c27852dda0e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy" afterPath="$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/groovy/com/moksamedia/mrgadget/MrGadgetTest.groovy" afterPath="$PROJECT_DIR$/src/test/groovy/com/moksamedia/mrgadget/MrGadgetTest.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MrGadget.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
+    <ignored path="$PROJECT_DIR$/../mrgadget-gradle-plugin/.gradle/" />
+    <ignored path="$PROJECT_DIR$/../mrgadget-gradle-plugin/build/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,14 +37,58 @@
     <favorites_list name="MrGadget" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5281827">
+    <splitter split-orientation="horizontal" split-proportion="0.6123062">
       <split-first>
         <leaf>
-          <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+          <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/build.gradle">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.58291954">
-                  <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="1" column="24" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/build.gradle">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="122" column="36" selection-start-line="122" selection-start-column="36" selection-end-line="122" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="build.gradle.bak" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/build.gradle.bak">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="mrgadget-plugin.gradle" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-plugin.gradle">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+                  <folding>
+                    <element signature="e#47#75#0" expanded="true" />
+                    <marker date="1448061335000" expanded="true" signature="174:634" placeholder="{...}" />
+                    <marker date="1448061335000" expanded="true" signature="509:519" placeholder="{" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="mrgadget-plugin.src" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-plugin.src">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.17928287">
+                  <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
                   <folding />
                 </state>
               </provider>
@@ -73,8 +121,8 @@
           <file leaf-file-name="MrGadget.groovy" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.2919563">
-                  <caret line="699" column="0" selection-start-line="699" selection-start-column="0" selection-end-line="699" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.67231077">
+                  <caret line="84" column="21" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -95,7 +143,7 @@
     </splitter>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -112,6 +160,22 @@
               <ExternalProjectPojo>
                 <option name="name" value="MrGadget" />
                 <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="mrgadget-gradle-plugin" />
+              <option name="path" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="mrgadget-gradle-plugin" />
+                <option name="path" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -270,12 +334,173 @@
             </list>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../mrgadget-gradle-plugin">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the outputs of this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="build" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'main'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="classes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Deletes the build directory." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="clean" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles the main Groovy source." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="compileGroovy" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'main:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="compileJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles the test Groovy source." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="compileTestGroovy" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'test:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="compileTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the components produced by root project 'mrgadget-gradle-plugin'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="components" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays all dependencies declared in root project 'mrgadget-gradle-plugin'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="dependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the insight into a specific dependency in root project 'mrgadget-gradle-plugin'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="dependencyInsight" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="generateApplyFromPlugin" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Groovydoc API documentation for the main source code." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="groovydoc" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays a help message." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="help" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Initializes a new Gradle build. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="init" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a jar archive containing the main classes." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="jar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Javadoc API documentation for the main source code." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="javadoc" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Do you know who knows?" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="knows" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the configuration model of root project 'mrgadget-gradle-plugin'. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="model" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes JVM resources 'main:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="processResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes JVM resources 'test:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="processTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the sub-projects of root project 'mrgadget-gradle-plugin'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="projects" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the properties of root project 'mrgadget-gradle-plugin'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="properties" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Create a combined JAR of project and runtime dependencies" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="shadowJar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Displays the tasks runnable from root project 'mrgadget-gradle-plugin'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs the unit tests." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'test'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="testClasses" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Gradle wrapper files. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                <option name="name" value="wrapper" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="1448058313000" />
         <entry key="$PROJECT_DIR$/../RxJavaString" value="2890018312000" />
+        <entry key="$PROJECT_DIR$/../mrgadget-gradle-plugin" value="2896121458000" />
         <entry key="$PROJECT_DIR$/../vert.x/vertx-examples" value="1445457622000" />
         <entry key="$PROJECT_DIR$/../../YounityServer-Gradle" value="7237152750000" />
         <entry key="$PROJECT_DIR$/../../ng-java-client-tester" value="1444690696000" />
@@ -394,6 +619,261 @@
             </ExternalProjectBuildClasspathPojo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../mrgadget-gradle-plugin">
+          <value>
+            <ExternalProjectBuildClasspathPojo>
+              <option name="modulesBuildClasspath">
+                <map>
+                  <entry key="$PROJECT_DIR$/../mrgadget-gradle-plugin">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="entries">
+                          <list>
+                            <option value="$MODULE_DIR$/unresolved dependency - com.moksamedia mrgadget 0.2.4" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-core-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/groovy-all-2.3.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/asm-all-5.0.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/ant-1.9.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/commons-collections-3.2.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/commons-io-1.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/commons-lang-2.6.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/guava-jdk5-17.0.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jcip-annotations-1.0.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jul-to-slf4j-1.7.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jarjar-1.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/javax.inject-1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/slf4j-api-1.7.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/log4j-over-slf4j-1.7.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jcl-over-slf4j-1.7.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/ant-launcher-1.9.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-docs-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-model-core-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-base-services-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-base-services-groovy-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-model-groovy-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-cli-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-native-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jna-3.2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/jansi-1.2.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-osx-i386-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-osx-amd64-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-linux-amd64-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-linux-i386-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-windows-amd64-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-windows-i386-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-freebsd-i386-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/native-platform-freebsd-amd64-0.10.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-messaging-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/kryo-2.20.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/reflectasm-1.07-shaded.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/minlog-1.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/objenesis-1.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-resources-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-dependency-management-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/ivy-2.2.0.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gson-2.2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-core-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/xbean-reflect-3.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/bcprov-jdk15on-1.51.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jsch-0.1.51.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-sec-dispatcher-1.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aether-impl-1.13.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aether-util-1.13.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aether-spi-1.13.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/wagon-provider-api-2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-aether-provider-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-repository-metadata-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-classworlds-2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aether-connector-wagon-1.13.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-model-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/wagon-http-2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-settings-builder-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-compat-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-component-annotations-1.5.5.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-plugin-api-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-container-default-1.5.5.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-artifact-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-interpolation-1.14.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-settings-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aether-api-1.13.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-cipher-1.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/wagon-file-2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/maven-model-builder-3.0.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/plexus-utils-2.0.6.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/wagon-http-shared4-2.4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-plugin-use-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-resources-http-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/httpclient-4.2.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/nekohtml-1.9.14.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/commons-codec-1.6.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/httpcore-4.2.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jcifs-1.3.17.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/xml-apis-1.3.04.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/xercesImpl-2.9.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-tooling-api-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/gradle-wrapper-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-plugins-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/junit-4.12.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/testng-6.3.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/commons-cli-1.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/bsh-2.0b4.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jcommander-1.12.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/snakeyaml-1.6.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/hamcrest-core-1.3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-code-quality-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-jetty-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jetty-6.1.25.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jetty-util-6.1.25.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/servlet-api-2.5-20081211.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jetty-plus-6.1.25.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jsp-2.1-6.1.14.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jetty-annotations-6.1.25.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/geronimo-annotation_1.0_spec-1.0.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jetty-naming-6.1.25.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/core-3.1.1.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jsp-api-2.1-6.1.14.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-antlr-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-osgi-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/bndlib-2.1.0.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-maven-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/pmaven-common-0.8-20100325.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/pmaven-groovy-0.8-20100325.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-ide-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-announce-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-scala-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-sonar-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/sonar-batch-bootstrapper-2.9.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-signing-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/bcpg-jdk15on-1.51.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-ear-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-javascript-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/rhino-1.7R3.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/simple-4.1.21.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-build-comparison-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-diagnostics-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-reporting-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jatl-0.2.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-publish-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-ivy-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-jacoco-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-build-init-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-platform-base-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-platform-jvm-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-language-jvm-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-language-java-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-language-groovy-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-language-scala-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-platform-native-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-platform-play-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-language-native-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-ide-native-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-testing-native-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-plugin-development-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-resources-sftp-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-resources-s3-2.7.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aws-java-sdk-s3-1.9.19.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aws-java-sdk-kms-1.9.19.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/aws-java-sdk-core-1.9.19.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jackson-core-2.3.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jackson-annotations-2.3.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/jackson-databind-2.3.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/joda-time-2.8.2.jar" />
+                            <option value="$USER_HOME$/.sdkman/gradle/2.7/lib/plugins/gradle-tooling-api-builders-2.7.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jengelman.gradle.plugins/shadow/1.2.2/845f8ceb663e62ad207b663a02cfba9730321cf0/shadow-1.2.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jengelman.gradle.plugins/shadow/1.2.2/66cbbff30eb80f5b65037e73f5c9f6ad92deb305/shadow-1.2.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.5/769f3cca4ce92088288be3d0238ef96ef787e82f/jdom2-2.0.5-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.5/2001db51c131e555bafdb77fc52af6a9408c505e/jdom2-2.0.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/5.0.3/dcc2193db20e19e1feca8b1240dbbc4e190824fa/asm-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-commons-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/5.0.3/a7111830132c7f87d08fe48cb0ca07630f8cb91c/asm-commons-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant/1.9.4/ffa48418a72bff1cbd24a651861e003318129eb6/ant-1.9.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant/1.9.4/6d473e8653d952045f550f4ef225a9591b79094a/ant-1.9.4.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/2.0.6/794dbb2673e674e7ae55948657c119342fe2e448/plexus-utils-2.0.6-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.plexus/plexus-utils/2.0.6/3a20c424a712a7c02b02af61dcad5f001b29a9fd/plexus-utils-2.0.6.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.0.3/f0f24f6666c1a15c7e202e91610476bd4ce59368/asm-tree-5.0.3-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/5.0.3/287749b48ba7162fb67c93a026d690b29f410bed/asm-tree-5.0.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant-launcher/1.9.4/b7ae945463dece0e58f3ebbf6d3d4c773277e1b2/ant-launcher-1.9.4-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant-launcher/1.9.4/334b62cb4be0432769679e8b94e83f8fd5ed395c/ant-launcher-1.9.4.jar" />
+                          </list>
+                        </option>
+                        <option name="path" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="name" value="mrgadget-gradle-plugin" />
+              <option name="projectBuildClasspath">
+                <list>
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/ant-1.9.3.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/ant-launcher-1.9.3.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-base-services-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-base-services-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-cli-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-core-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-docs-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-launcher-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-messaging-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-model-core-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-model-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-native-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-open-api-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-resources-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-tooling-api-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-ui-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/gradle-wrapper-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/groovy-all-2.3.10.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-announce-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-antlr-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-build-comparison-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-build-init-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-code-quality-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-dependency-management-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-diagnostics-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-ear-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-ide-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-ide-native-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-ivy-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-jacoco-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-javascript-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-jetty-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-language-groovy-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-language-java-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-language-jvm-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-language-native-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-language-scala-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-maven-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-osgi-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-platform-base-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-platform-jvm-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-platform-native-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-platform-play-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-plugin-development-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-plugin-use-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-plugins-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-publish-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-reporting-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-resources-http-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-resources-s3-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-resources-sftp-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-scala-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-signing-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-sonar-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-test-kit-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-testing-native-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/gradle-tooling-api-builders-2.7.jar" />
+                  <option value="$USER_HOME$/.sdkman/gradle/current/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$PROJECT_DIR$/../mrgadget-gradle-plugin/buildSrc/src/main/java" />
+                  <option value="$PROJECT_DIR$/../mrgadget-gradle-plugin/buildSrc/src/main/groovy" />
+                </list>
+              </option>
+            </ExternalProjectBuildClasspathPojo>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="externalProjectsViewState">
@@ -406,6 +886,9 @@
         <option value="$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy" />
         <option value="$PROJECT_DIR$/src/test/groovy/com/moksamedia/mrgadget/MrGadgetTest.groovy" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-plugin.src" />
+        <option value="$PROJECT_DIR$/../mrgadget-gradle-plugin/src/main/groovy/com/moksamedia/mrgadgetplugin/MrGadgetPlugin.groovy" />
+        <option value="$PROJECT_DIR$/../mrgadget-gradle-plugin/build.gradle" />
       </list>
     </option>
   </component>
@@ -424,7 +907,7 @@
     <option name="width" value="2560" />
     <option name="height" value="1413" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -456,6 +939,64 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="MrGadget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mrgadget-gradle-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mrgadget-gradle-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mrgadget-gradle-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="groovy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mrgadgetplugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadgetPlugin.groovy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -586,13 +1127,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MrGadget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mrgadget-gradle-plugin" />
     <property name="recentsLimit" value="5" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Gradle.testExecRemote">
     <configuration default="false" name="MrGadgetTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -857,17 +1433,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1413" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329296" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30507192" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21650265" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21877366" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20611596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -902,7 +1479,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -931,14 +1508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.2919563">
-          <caret line="699" column="0" selection-start-line="699" selection-start-column="0" selection-end-line="699" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/groovy/com/moksamedia/mrgadget/MrGadgetTest.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="175.81482">
@@ -957,11 +1526,161 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58291954">
-          <caret line="119" column="31" selection-start-line="119" selection-start-column="31" selection-end-line="119" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-gradle-plugin.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-plugin.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+          <folding>
+            <element signature="e#47#75#0" expanded="true" />
+            <marker date="1448061335000" expanded="true" signature="174:634" placeholder="{...}" />
+            <marker date="1448061335000" expanded="true" signature="509:519" placeholder="{" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/groovy/com/moksamedia/mrgadget/MrGadget.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67231077">
+          <caret line="84" column="21" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/src/main/groovy/com/moksamedia/mrgadgetplugin/MrGadgetPlugin.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7393365">
+          <caret line="113" column="32" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
+          <folding>
+            <element signature="e#39#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="122" column="36" selection-start-line="122" selection-start-column="36" selection-end-line="122" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/build.gradle.bak">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mrgadget-gradle-plugin/mrgadget-plugin.src">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17928287">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>groovy-2.4.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>mrgadget-gradle-plugin</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Gradle: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
