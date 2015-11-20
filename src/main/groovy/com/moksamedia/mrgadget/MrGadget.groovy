@@ -82,6 +82,7 @@ class MrGadget {
 	int logProgressGranularity = 10
 		
 	String password = null, sudoPassword = null, prefsEncryptionKey = null
+	String privateKey = null
 	
 	boolean clearAllPasswords = false
 	
@@ -160,8 +161,13 @@ class MrGadget {
 		
 		// don't connect if we already have a session
 		if (session?.isConnected()) return
-				
-		session = jsch.getSession(user, host, port);
+
+        if (privateKey != null) {
+            log.info("Adding private key at " + privateKey);
+            jsch.addIdentity(privateKey)
+        }
+
+        session = jsch.getSession(user, host, port);
 
 		log.info "********** MrGadget v$version Session Created **********"
 		
@@ -175,7 +181,7 @@ class MrGadget {
 		}
 
 		session.setUserInfo(ui)
-				
+
 		String pass 
 		
 		// check for provided password

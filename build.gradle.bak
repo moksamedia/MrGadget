@@ -1,0 +1,136 @@
+apply plugin: 'groovy'
+apply plugin: 'fatjar'
+
+version='0.2.4'
+
+buildscript {
+    dependencies {
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.1.2' // adds fatJar task
+    }
+	repositories {
+		mavenCentral()
+	}
+}
+
+dependencies {
+	provided 'org.codehaus.groovy:groovy:1.8.6' ext { fatJarExclude = true }	// exclude from fatJar
+	compile 'org.slf4j:slf4j-simple:1.6.3' ext { fatJarExclude = true }		// exclude from fatJar
+	compile 'com.jcraft:jsch:0.1.48'	// JSch is the SSH java package
+	compile 'org.jasypt:jasypt-acegisecurity:1.9.0'	// for encrypting the stored passwords
+	testCompile 'junit:junit:latest.version'
+	//testCompile 'org.apache.sshd:sshd-core:0.7.0', 'org.apache.sshd:sshd:0.7.0', 'org.apache.sshd:apache-sshd:0.7.0', 'org.apache.sshd:sshd-pam:0.7.0', 'org.apache.mina:mina-core:2.0.5'
+	testRuntime 'bouncycastle:bcprov-jdk15:140'
+	testCompile 'org.apache.mina:mina-core:2.0.4', 'org.apache.sshd:sshd-core:0.7.0'
+	//testCompile 'directory:apacheds-main:0.9.3'
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+task writeVersionInfo << {
+	File file = file 'src/main/resources/version'
+	file.write("${version}")
+}
+build.dependsOn writeVersionInfo
+
+jar {
+	manifest {
+		attributes("Implementation-Title": "MrGadget", "Implementation-Version": version)
+	}
+}
+
+// adds 'with-dependencies' to the fatJar name
+fatJar {
+	classifier 'jar-with-dependencies'
+	manifest {
+		attributes("Implementation-Title": "MrGadget", "Implementation-Version": version)
+	}
+}
+
+// copy jar and fatJar to base project directory so they will be in git (and on github for download)
+build << {
+	copy {
+		println "Copying ${jar.archiveName} to $projectDir/repo/com_moksamedia/mrgadget/$version"
+		from("$buildDir/libs/${jar.archiveName}")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
+	}
+	copy {
+		println "Copying ${fatJar.archiveName} to $projectDir/repo/com_moksamedia/mrgadget/$version"
+		from("$buildDir/libs/${fatJar.archiveName}")
+		into("$projectDir/repo/com_moksamedia/mrgadget/$version")
+	}
+}
+
+
+/*
+ * REQUIRED FOR OSS SONATYPE AND MAVEN CENTRAL DEPLOYMENT
+ */
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group = 'com.moksamedia'
+
+// create sources jar and javadoc jar (required for deployment to maven central)
+task sourcesJar(type: Jar, dependsOn:classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+task javadocJar(type: Jar, dependsOn:javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+// add the jars as artifacts
+artifacts {
+	archives sourcesJar
+	archives javadocJar
+	archives jar
+	archives fatJar
+}
+
+signing {
+	sign configurations.archives
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+ 
+			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+			  authentication(userName: sonatypeUsername, password: sonatypePassword)
+			}
+ 
+			pom.project {
+			   name 'MrGadget'
+			   packaging 'jar'
+			   description 'MrGadget is a utility (build for Gradle, but generally usable anywhere) that can upload files to a remote server and execute commands on a remote server'
+			   url 'http://github.com/moksamedia/MrGadget'
+ 
+			   scm {
+				   url 'scm:git@github.com:moksamedia/MrGadget.git'
+				   connection 'scm:git@github.com:moksamedia/MrGadget.git'
+				   developerConnection 'scm:git@github.com:moksamedia/MrGadget.git'
+			   }
+ 
+			   licenses {
+				   license {
+					   name 'The Apache Software License, Version 2.0'
+					   url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					   distribution 'repo'
+				   }
+			   }
+ 
+			   developers {
+				   developer {
+					   id 'cantgetnosleep'
+					   name 'Andrew Hughes'
+				   }
+			   }
+		   }
+		}
+	}
+}

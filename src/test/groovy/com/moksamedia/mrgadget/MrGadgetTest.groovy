@@ -295,6 +295,53 @@ class MrGadgetTest {
 		
 	}
 
+	@Test
+	void testSCP_PrivateKey() {
+
+		String user = 'ubuntu'
+		String host = '10.0.11.26'
+		boolean leaveSessionOpen = false
+		boolean strictHostKeyChecking = false
+		String privateKey = "~/.ssh/dev-operations.pem"
+
+		String localFile = 'sshtest/testfile1.txt'
+		String remoteFile = '~/remotefile.txt'
+
+		File from = new File(localFile)
+		localFile = from.getAbsolutePath()
+
+		def params = [
+				user:user,
+				host:host,
+				privateKey:privateKey,
+				leaveSessionOpen:leaveSessionOpen,
+				strictHostKeyChecking:strictHostKeyChecking,
+				localFile:localFile,
+				remoteFile:remoteFile,
+				showProgressDialog:false
+		]
+
+		MrGadget mrg = new MrGadget(params)
+
+		mrg.port = 22
+
+		TestUserInfo ui = new TestUserInfo()
+
+		ui.getPassphraseClosure = { message -> log.info message; password }
+		ui.getPasswordClosure = { message -> log.info message; password }
+		ui.promptYesNoClosure = { log.info message; true }
+
+		mrg.ui = new TestUserInfo()
+
+		mrg.copyToRemoteSCP(params)
+
+		mrg.closeSession()
+
+		log.info mrg.commandUsed
+		assert mrg.commandUsed.trim() == 'scp  -t ~/remotefile.txt C0644 3735 testfile1.txt'
+		assert mrg.errorOutput == ''
+
+	}
 
 	@Test
 	void testSFTP() {
