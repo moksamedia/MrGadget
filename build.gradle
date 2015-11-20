@@ -36,12 +36,14 @@ task writeVersionInfo << {
 build.dependsOn writeVersionInfo
 
 jar {
+    baseName = "mrgadget"
     manifest {
         attributes("Implementation-Title": "MrGadget", "Implementation-Version": version)
     }
 }
 
 shadowJar {
+    baseName = "mrgadget"
     classifier 'jar-with-dependencies'
     manifest {
         attributes("Implementation-Title": "MrGadget", "Implementation-Version": version)
