@@ -55,8 +55,8 @@ shadowJar {
         attributes("Implementation-Title": "MrGadget", "Implementation-Version": version)
     }
     dependencies {
-        exclude('org.codehaus.groovy:groovy:.*')
-        exclude('org.slf4j:slf4j-simple:.*')
+        exclude(dependency('org.codehaus.groovy:groovy:.*'))
+        exclude(dependency('org.slf4j:slf4j-simple:.*'))
     }
 }
 
