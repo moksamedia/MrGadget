@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: com.moksamedia:mrgadget:0.3.0:jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/build/libs/mrgadget-0.3.0-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

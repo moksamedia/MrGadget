@@ -344,6 +344,44 @@ class MrGadgetTest {
 	}
 
 	@Test
+	void testExecRemoteSudo_PrivateKey() {
+
+		String user = 'ubuntu'
+		String host = '10.0.11.26'
+		boolean leaveSessionOpen = false
+		boolean strictHostKeyChecking = false
+		String privateKey = "~/.ssh/dev-operations.pem"
+
+		MrGadget mrg = new MrGadget(
+				user:user,
+				host:host,
+				privateKey:privateKey,
+				leaveSessionOpen:leaveSessionOpen,
+				strictHostKeyChecking:strictHostKeyChecking
+		)
+
+		mrg.port = 22
+
+		TestUserInfo ui = new TestUserInfo()
+
+		ui.getPassphraseClosure = { message -> log.info message; password }
+		ui.getPasswordClosure = { message -> log.info message; password }
+		ui.promptYesNoClosure = { log.info message; true }
+
+		mrg.ui = new TestUserInfo()
+
+		mrg.execRemoteSudo('cat /var/log/upstart/tomcat.log')
+		assert mrg.standardOutput.trim() == "sudo -S -p '' cat /var/log/upstart/tomcat.log"
+		assert mrg.commandUsed.trim() == "sudo -S -p '' ls /var/log/upstart"
+		assert mrg.errorOutput == ''
+
+		mrg.closeSession()
+
+	}
+
+
+
+	@Test
 	void testSFTP() {
 
 		String user = 'testuser'
